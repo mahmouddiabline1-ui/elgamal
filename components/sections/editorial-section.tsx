@@ -1,15 +1,17 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { useI18n } from "@/lib/i18n";
 
 const specs = [
-  { label: "Surface Area", value: "180m²" },
-  { label: "Energy Use", value: "15 kWh/m²" },
-  { label: "Solar Panels", value: "40 m²" },
-  { label: "Carbon Balance", value: "-20%" },
+  { label: "Years Experience", value: "18+" },
+  { label: "Projects Delivered", value: "120+" },
+  { label: "Happy Clients", value: "2500+" },
+  { label: "Awards Won", value: "45+" },
 ];
 
 export function EditorialSection() {
+  const { t } = useI18n();
   const videoRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const rafRef = useRef<number | null>(null);
@@ -91,7 +93,7 @@ export function EditorialSection() {
             className="border-b border-r border-border p-8 text-center last:border-r-0 md:border-b-0"
           >
             <p className="mb-2 text-xs uppercase tracking-widest text-muted-foreground">
-              {spec.label}
+              {t(spec.label)}
             </p>
             <p className="font-medium text-foreground text-5xl">
               {spec.value}

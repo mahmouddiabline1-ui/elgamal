@@ -2,37 +2,39 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
-const word = "MONO";
+const word = "elgamal";
 
 const sideImages = [
   {
     src: "/images/hero-side-1.png",
-    alt: "Modern architecture with corten steel",
+    alt: "Residential development aerial view",
     position: "left",
     span: 1,
   },
   {
     src: "/images/hero-side-2.png",
-    alt: "Aerial view of modern home",
+    alt: "Commercial tower exterior",
     position: "left",
     span: 1,
   },
   {
     src: "/images/hero-side-3.png",
-    alt: "Interior view with landscape",
+    alt: "Luxury interior design project",
     position: "right",
     span: 1,
   },
   {
     src: "/images/hero-side-4.png",
-    alt: "Modern architecture at night",
+    alt: "Administrative building at dusk",
     position: "right",
     span: 1,
   },
 ];
 
 export function HeroSection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -76,7 +78,7 @@ export function HeroSection() {
   const sideTranslateY = -(imageProgress * 15); // Move up by 15% when fully expanded
 
   return (
-    <section ref={sectionRef} className="relative bg-background">
+    <section id="hero" ref={sectionRef} className="relative bg-background">
       {/* Sticky container for scroll animation */}
       <div className="sticky top-0 h-screen overflow-hidden">
         <div className="flex h-full w-full items-center justify-center">
@@ -125,12 +127,17 @@ export function HeroSection() {
                 borderRadius: `${borderRadius}px`,
               }}
             >
-              {/* Text Behind - Fades out first */}
-              <div 
-                className="absolute inset-0 z-0 flex items-center justify-center"
+              {/* Brand word - on top of the image. Forced LTR so the Latin
+                  brand never reverses in Arabic/RTL mode. */}
+              <div
+                className="absolute inset-0 z-20 flex items-center justify-center"
                 style={{ opacity: textOpacity, transform: 'translateY(-200px)' }}
               >
-                <h1 className="whitespace-nowrap text-[35vw] font-bold leading-[0.8] tracking-tighter text-black">
+                <h1
+                  dir="ltr"
+                  className="whitespace-nowrap text-[20vw] font-bold leading-[0.8] tracking-tighter text-white"
+                  style={{ textShadow: '0 2px 30px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.6)' }}
+                >
                   {word.split("").map((letter, index) => (
                     <span
                       key={index}
@@ -195,9 +202,7 @@ export function HeroSection() {
         style={{ opacity: textOpacity }}
       >
         <p className="mx-auto max-w-2xl text-center text-2xl leading-relaxed text-white md:text-3xl lg:text-[2.5rem] lg:leading-snug">
-          Lightweight, durable
-          <br />
-          and adventure-ready.
+          {t("Premium residential, commercial, and administrative developments with luxury interior design and finishing services.")}
         </p>
       </div>
 

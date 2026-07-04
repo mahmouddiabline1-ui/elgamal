@@ -2,14 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useI18n } from "@/lib/i18n";
 
 const titles = [
-  "Sustainable Architecture.",
-  "Built for Tomorrow.",
-  "Eco-Responsible.",
+  "Building Better Communities.",
+  "Engineering Excellence.",
+  "Redefining Living Spaces.",
 ];
 
 export function PhilosophySection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLDivElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const [titleOpacity, setTitleOpacity] = useState(0);
@@ -71,7 +73,7 @@ export function PhilosophySection() {
   }, [updateTransforms]);
 
   return (
-    <section id="products" className="bg-background">
+    <section id="overview" className="bg-background">
       {/* Scroll-Animated Product Grid */}
       <div ref={sectionRef} className="relative" style={{ height: "200vh" }}>
         <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
@@ -130,7 +132,7 @@ export function PhilosophySection() {
                         WebkitFontSmoothing: 'antialiased',
                       }}
                     >
-                      {title}
+                      {t(title)}
                     </h2>
                   );
                 })}
@@ -145,7 +147,7 @@ export function PhilosophySection() {
         <div className="text-center">
           
           <p className="mt-8 leading-relaxed text-muted-foreground text-3xl text-center">
-            {("A design home that combines contemporary aesthetics and energy performance. Built with eco-friendly materials, it minimizes carbon footprint while offering optimal comfort.").split(" ").map((word, index, array) => {
+            {t("A leading real estate development and interior design firm delivering premium residential, commercial, and administrative projects across the region. With over 18 years of experience, we combine innovation, quality craftsmanship, and sustainable practices to create spaces that inspire.").split(" ").map((word, index, array) => {
               const wordProgress = Math.max(0, Math.min(1, (descriptionProgress * array.length) - index));
               const opacity = wordProgress;
               const blur = (1 - wordProgress) * 40;

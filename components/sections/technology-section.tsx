@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useI18n } from "@/lib/i18n";
 
 function ScrollRevealText({ text }: { text: string }) {
+  const { t } = useI18n();
   const containerRef = useRef<HTMLParagraphElement>(null);
   const [progress, setProgress] = useState(0);
 
@@ -31,8 +33,8 @@ function ScrollRevealText({ text }: { text: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const words = text.split(" ");
-  
+  const words = t(text).split(" ");
+
   return (
     <p
       ref={containerRef}
@@ -66,30 +68,31 @@ function ScrollRevealText({ text }: { text: string }) {
 
 const sideImages = [
   {
-    src: "/images/interior-view.png",
-    alt: "Interior view with landscape",
+    src: "/apartments/apt-12.jpg",
+    alt: "Finishing work detail",
     position: "left",
   },
   {
-    src: "/images/rusted-metal.png",
-    alt: "Rusted metal texture",
+    src: "/apartments/apt-13.jpg",
+    alt: "Finishing work detail",
     position: "right",
   },
 ];
 
 const textCycles = [
-  "Design & Sustainability.",
-  "Passive Energy.",
-  "Bio-sourced Construction.",
+  "Developing Landmarks.",
+  "Crafting Interiors.",
+  "Delivering Excellence.",
 ];
 
 export function TechnologySection() {
+  const { t } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
   const textSectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [textProgress, setTextProgress] = useState(0);
   
-  const descriptionText = "Passive architecture reimagining modern living. Triple glazing, reinforced insulation and natural ventilation combine with solar panels to create an energy-autonomous home. Bio-sourced materials like solid wood and hemp wool ensure healthy indoor air and minimal ecological footprint.";
+  const descriptionText = "Redefining modern living through exceptional real estate development and interior design. Every project is a testament to our commitment to quality, innovation, and creating sustainable communities that stand the test of time.";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -188,8 +191,8 @@ export function TechnologySection() {
               {/* Layered Images - Progressive Fade In */}
               {/* Image 1 - Base layer - Sunrise/Sunset with sun rays */}
               <Image
-                src="/images/mono-1.png"
-                alt="Modern architecture at sunrise"
+                src="/apartments/apt-03.jpg"
+                alt="Finished apartment interior"
                 fill
                 className="object-cover"
                 style={{
@@ -199,8 +202,8 @@ export function TechnologySection() {
               
               {/* Image 2 - Daytime scene - Fades in during first text cycle */}
               <Image
-                src="/images/mono-2.png"
-                alt="Modern architecture in daylight"
+                src="/apartments/apt-04.jpg"
+                alt="Finished apartment interior"
                 fill
                 className="absolute inset-0 object-cover"
                 style={{
@@ -211,8 +214,8 @@ export function TechnologySection() {
               
               {/* Image 3 - Dusk/Evening - Fades in during second text cycle */}
               <Image
-                src="/images/mono-3.png"
-                alt="Modern architecture at dusk"
+                src="/apartments/apt-08.jpg"
+                alt="Finished apartment interior"
                 fill
                 className="absolute inset-0 object-cover"
                 style={{
@@ -223,8 +226,8 @@ export function TechnologySection() {
               
               {/* Image 4 - Night with stars - Fades in during third text cycle */}
               <Image
-                src="/images/mono-4.png"
-                alt="Modern architecture at night"
+                src="/apartments/apt-10.jpg"
+                alt="Finished apartment interior"
                 fill
                 className="absolute inset-0 object-cover"
                 style={{
@@ -245,10 +248,10 @@ export function TechnologySection() {
                   const cycleEnd = (cycleIndex + 1) / textCycles.length;
                   const cycleMid = (cycleStart + cycleEnd) / 2;
                   
-                  const words = text.split(" ");
-                  
+                  const words = t(text).split(" ");
+
                   return (
-                    <h2 
+                    <h2
                       key={cycleIndex}
                       className="absolute max-w-3xl font-medium leading-tight tracking-tight text-white md:text-5xl lg:text-7xl text-5xl"
                     >

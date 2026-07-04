@@ -1,0 +1,10 @@
+[build]
+  command = "next build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Netlify's official Next.js runtime — handles SSR/SSG, image optimization,
+# and routing automatically. Netlify installs it on build.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

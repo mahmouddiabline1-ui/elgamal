@@ -1,38 +1,54 @@
 "use client";
 
 import { FadeImage } from "@/components/fade-image";
+import { useI18n } from "@/lib/i18n";
 
 const accessories = [
   {
     id: 1,
-    name: "Compact Model",
-    description: "120m² living space with optimal energy efficiency",
-    price: "$285,000",
-    image: "/images/hero-side-1.png",
+    name: "Modern Package",
+    description: "Sleek lines, open spaces, and contemporary finishes. Perfect for urban living with smart home integration.",
+    price: "From $15,000",
+    image: "/apartments/apt-15.jpg",
   },
   {
     id: 2,
-    name: "Standard Model",
-    description: "180m² perfect balance of space and sustainability",
-    price: "$395,000",
-    image: "/images/hero-side-2.png",
+    name: "Luxury Package",
+    description: "Premium marble, custom joinery, and statement lighting. Designed for those who expect the extraordinary.",
+    price: "From $35,000",
+    image: "/apartments/apt-16.jpg",
   },
   {
     id: 3,
-    name: "Premium Model",
-    description: "250m² expansive design with maximum comfort",
-    price: "$525,000",
-    image: "/images/hero-side-4.png",
+    name: "Classic Package",
+    description: "Timeless elegance with ornate details, rich wood tones, and traditional craftsmanship.",
+    price: "From $20,000",
+    image: "/apartments/apt-17.jpg",
+  },
+  {
+    id: 4,
+    name: "Minimal Package",
+    description: "Less is more. Clean surfaces, neutral palettes, and functional beauty for serene spaces.",
+    price: "From $12,000",
+    image: "/apartments/apt-18.jpg",
+  },
+  {
+    id: 5,
+    name: "VIP Package",
+    description: "Bespoke design consultation, exclusive materials, and dedicated project management from concept to handover.",
+    price: "From $50,000",
+    image: "/apartments/apt-19.jpg",
   },
 ];
 
 export function CollectionSection() {
+  const { t } = useI18n();
   return (
-    <section id="accessories" className="bg-background">
+    <section id="packages" className="bg-background">
       {/* Section Title */}
       <div className="px-6 py-20 md:px-12 lg:px-20 md:py-10">
         <h2 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl">
-          Surface Options
+          {t("Finishing Packages")}
         </h2>
       </div>
 
@@ -57,14 +73,14 @@ export function CollectionSection() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-medium leading-snug text-foreground">
-                      {accessory.name}
+                      {t(accessory.name)}
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      {accessory.description}
+                      {t(accessory.description)}
                     </p>
                   </div>
                   <span className="text-lg font-medium text-foreground">
-                    {accessory.price}
+                    {t(accessory.price)}
                   </span>
                 </div>
               </div>
@@ -91,14 +107,14 @@ export function CollectionSection() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h3 className="text-lg font-medium leading-snug text-foreground">
-                      {accessory.name}
+                      {t(accessory.name)}
                     </h3>
                     <p className="mt-2 text-sm text-muted-foreground">
-                      {accessory.description}
+                      {t(accessory.description)}
                     </p>
                   </div>
                   <span className="font-medium text-foreground text-2xl">
-                    {accessory.price}
+                    {t(accessory.price)}
                   </span>
                 </div>
               </div>
