@@ -37,10 +37,10 @@ function GlassServiceGroup({
         {items.map((service, index) => {
           const Icon = icons[index];
           return (
-            <article key={service.name} className="group relative min-h-64 w-[78vw] max-w-sm shrink-0 snap-center overflow-hidden rounded-[28px] border border-white/20 bg-white/[.09] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,.3),0_24px_70px_rgba(0,0,0,.22)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-white/40 hover:bg-white/[.14] md:w-auto md:max-w-none md:p-8">
+            <article key={service.name} className="group relative min-h-64 w-[78vw] max-w-sm shrink-0 snap-center overflow-hidden rounded-[28px] border border-white/20 bg-[#35231f]/70 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,.22),0_18px_50px_rgba(0,0,0,.18)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:border-white/40 hover:bg-[#49322c]/75 md:w-auto md:max-w-none md:p-8">
               <div className="pointer-events-none absolute -end-12 -top-12 h-36 w-36 rounded-full bg-[#d7b68f]/15 blur-3xl transition duration-500 group-hover:bg-[#d7b68f]/30" />
               <div className="relative flex h-full flex-col">
-                <div className="mb-10 grid h-14 w-14 place-items-center rounded-[18px] border border-white/25 bg-white/[.14] text-[#f2eadd] shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-2xl md:h-16 md:w-16">
+                <div className="mb-10 grid h-14 w-14 place-items-center rounded-[18px] border border-white/25 bg-white/[.14] text-[#f2eadd] shadow-[inset_0_1px_0_rgba(255,255,255,.35)] md:h-16 md:w-16">
                   <Icon size={27} strokeWidth={1.45} />
                 </div>
                 <span className="mb-3 text-[9px] font-bold tracking-[.28em] text-[#d7b68f]">{String(indexOffset + index + 1).padStart(2, "0")}</span>
