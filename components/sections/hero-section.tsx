@@ -42,24 +42,25 @@ export function HeroSection() {
   const gridProgress = Math.max(0, Math.min(1, (progress - 0.12) / 0.72));
   const copyOpacity = Math.max(0, 1 - progress / 0.32);
   const copyLift = Math.min(46, progress * 150);
-  const mobileSceneProgress = Math.min(1, mobileProgress / 0.64);
-  const mobileOutroProgress = Math.max(0, Math.min(1, (mobileProgress - 0.48) / 0.38));
+  const mobileSceneProgress = Math.min(1, mobileProgress / 0.72);
+  const mobileDarkProgress = Math.max(0, Math.min(1, (mobileProgress - 0.42) / 0.42));
+  const mobileMarkProgress = Math.max(0, Math.min(1, (mobileProgress - 0.62) / 0.28));
 
   return (
     <div id="hero" className="bg-[#241612]">
-      <section ref={mobileSectionRef} className="relative h-[230svh] bg-black text-[#f2eadd] md:hidden">
+      <section ref={mobileSectionRef} className="relative h-[280svh] bg-black text-[#f2eadd] md:hidden">
         <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
           <div
-            className="absolute inset-x-0 -top-[12svh] h-[124svh] will-change-transform"
-            style={{ transform: `translate3d(0, ${mobileSceneProgress * 18}svh, 0) scale(${1 + mobileSceneProgress * 0.08})` }}
+            className="absolute inset-x-0 top-0 h-[158svh] will-change-transform"
+            style={{ transform: `translate3d(0, ${mobileSceneProgress * -58}svh, 0) scale(${1 + mobileSceneProgress * 0.035})` }}
           >
-            <Image src="/brand/al-gamal-hero.webp" alt="Contemporary architecture by AL GAMAL" fill priority sizes="100vw" className="object-cover object-[66%_center]" />
+            <Image src="/brand/al-gamal-hero.webp" alt="Contemporary architecture by AL GAMAL" fill priority sizes="100vw" className="object-cover object-[64%_center]" />
           </div>
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.24),rgba(0,0,0,.05)_46%,rgba(0,0,0,.84))]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,.03)_42%,rgba(0,0,0,.72))]" />
 
           <div
             className="absolute inset-x-0 top-[34svh] z-10 px-5 text-center will-change-transform"
-            style={{ opacity: 1 - mobileOutroProgress, transform: `translate3d(0, ${mobileSceneProgress * -16}svh, 0)` }}
+            style={{ opacity: Math.max(0, 1 - mobileProgress / 0.38), transform: `translate3d(0, ${mobileSceneProgress * -28}svh, 0)` }}
           >
             <p className="mb-4 text-[10px] font-bold uppercase tracking-[.28em] text-[#e4c49c]">AL GAMAL · NEW DAMIETTA</p>
             <h1 className="font-display text-[4.75rem] font-semibold leading-[.78] tracking-[-.065em] text-[#fff8ec] drop-shadow-2xl">
@@ -67,17 +68,23 @@ export function HeroSection() {
             </h1>
           </div>
 
-          <div
-            className="absolute inset-0 z-20 bg-black will-change-[opacity]"
-            style={{ opacity: mobileOutroProgress }}
-          />
+          <div className="absolute inset-x-0 bottom-0 z-20 bg-black will-change-[height]" style={{ height: `${mobileDarkProgress * 108}%` }}>
+            <div className="absolute inset-x-0 top-0 h-32 -translate-y-full bg-gradient-to-t from-black to-transparent" />
+          </div>
           <div
             className="absolute inset-0 z-30 grid place-items-center will-change-transform"
-            style={{ opacity: Math.max(0, (mobileOutroProgress - 0.18) / 0.82), transform: `scale(${0.68 + mobileOutroProgress * 0.32})` }}
+            style={{ opacity: mobileDarkProgress, transform: `translate3d(0, ${(1 - mobileDarkProgress) * 18}svh, 0)` }}
           >
-            <div className="flex flex-col items-center gap-8">
-              <Image src="/brand/al-gamal-icon-light.png" alt="AL GAMAL" width={176} height={176} className="h-36 w-36 object-contain" />
-              <p className="text-[10px] font-semibold uppercase tracking-[.38em] text-[#d7b68f]">REAL ESTATE · CONTRACTING</p>
+            <div className="relative flex flex-col items-center gap-8">
+              <Image
+                src="/brand/al-gamal-icon-light.png"
+                alt="AL GAMAL"
+                width={196}
+                height={196}
+                className="h-40 w-40 object-contain"
+                style={{ opacity: 0.1 + mobileMarkProgress * 0.9, filter: `drop-shadow(0 0 ${6 + mobileMarkProgress * 24}px rgba(242,234,221,${mobileMarkProgress * 0.35}))` }}
+              />
+              <p className="text-[10px] font-semibold uppercase tracking-[.38em] text-[#d7b68f]" style={{ opacity: mobileMarkProgress }}>REAL ESTATE · CONTRACTING</p>
             </div>
           </div>
 
