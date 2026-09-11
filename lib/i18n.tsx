@@ -28,6 +28,12 @@ const ar: Record<string, string> = {
   "Building Better Communities.": "نبني مجتمعات أفضل.",
   "Engineering Excellence.": "هندسة الإتقان.",
   "Redefining Living Spaces.": "نعيد تعريف مساحات الحياة.",
+  "Places designed around the people who live, work, and grow within them.":
+    "أماكن مصممة حول احتياجات من يعيشون ويعملون وينمون بداخلها.",
+  "Every detail is planned, executed, and reviewed to endure for generations.":
+    "كل تفصيلة تُخطط وتُنفذ وتُراجع لتدوم عبر الأجيال.",
+  "Architecture where purposeful design meets a distinctly modern way of life.":
+    "عمارة يلتقي فيها التصميم الهادف بأسلوب حياة عصري ومتميز.",
   "A leading real estate development and interior design firm delivering premium residential, commercial, and administrative projects across the region. With over 18 years of experience, we combine innovation, quality craftsmanship, and sustainable practices to create spaces that inspire.":
     "شركة رائدة في التطوير العقاري والتصميم الداخلي، تقدّم مشروعات سكنية وتجارية وإدارية متميزة في المنطقة. بخبرة تتجاوز 18 عامًا، نجمع بين الابتكار وجودة الصنعة والممارسات المستدامة لنصنع مساحات تُلهم.",
 

@@ -1,171 +1,69 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState, useCallback } from "react";
+import Link from "next/link";
+import { ArrowUpLeft } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
-const titles = [
-  "Building Better Communities.",
-  "Engineering Excellence.",
-  "Redefining Living Spaces.",
+const principles = [
+  { number: "01", title: "Building Better Communities.", text: "Places designed around the people who live, work, and grow within them." },
+  { number: "02", title: "Engineering Excellence.", text: "Every detail is planned, executed, and reviewed to endure for generations." },
+  { number: "03", title: "Redefining Living Spaces.", text: "Architecture where purposeful design meets a distinctly modern way of life." },
 ];
 
 export function PhilosophySection() {
-  const { t } = useI18n();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const descriptionRef = useRef<HTMLDivElement>(null);
-  const [titleOpacity, setTitleOpacity] = useState(0);
-  const [descriptionProgress, setDescriptionProgress] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  const updateTransforms = useCallback(() => {
-    if (!sectionRef.current) return;
-    
-    const rect = sectionRef.current.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const sectionHeight = sectionRef.current.offsetHeight;
-    
-    // Calculate progress based on scroll position
-    const scrollableRange = sectionHeight - windowHeight;
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableRange));
-    
-    // Title rotates through 3 texts based on scroll progress
-    setTitleOpacity(progress);
-
-    // Description word animation
-    if (descriptionRef.current) {
-      const descRect = descriptionRef.current.getBoundingClientRect();
-      const descTop = descRect.top;
-      const descHeight = descRect.height;
-      
-      // Start animation when element enters viewport
-      const startTrigger = windowHeight * 0.8;
-      const endTrigger = windowHeight * 0.2;
-      
-      if (descTop < startTrigger && descTop > endTrigger - descHeight) {
-        const descProgress = Math.max(0, Math.min(1, (startTrigger - descTop) / (startTrigger - endTrigger)));
-        setDescriptionProgress(descProgress);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Cancel any pending animation frame
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      
-      // Use requestAnimationFrame for smooth updates
-      rafRef.current = requestAnimationFrame(updateTransforms);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    updateTransforms();
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
-  }, [updateTransforms]);
+  const { t, lang } = useI18n();
 
   return (
-    <section id="overview" className="bg-background">
-      {/* Scroll-Animated Product Grid */}
-      <div ref={sectionRef} className="relative" style={{ height: "200vh" }}>
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          <div className="relative w-full max-w-7xl px-4">
-            {/* Title - centered with 3D rotation */}
-            <div 
-              className="flex items-center justify-center pointer-events-none"
-              style={{ 
-                perspective: '1000px',
-              }}
-            >
-              <div className="relative w-full" style={{ transformStyle: 'preserve-3d', minHeight: '150px' }}>
-                {titles.map((title, index) => {
-                  // Last text "Built to last" stays visible at the end
-                  const isLastText = index === titles.length - 1;
-                  
-                  // Calculate which text should be visible based on scroll progress
-                  const segmentSize = 1 / titles.length;
-                  const startProgress = index * segmentSize;
-                  const endProgress = (index + 1) * segmentSize;
-                  
-                  let rotateX = 0;
-                  let opacity = 0;
-                  
-                  if (titleOpacity >= startProgress && titleOpacity < endProgress) {
-                    // Active text - rotating in
-                    const localProgress = (titleOpacity - startProgress) / segmentSize;
-                    rotateX = (1 - localProgress) * 90;
-                    opacity = localProgress;
-                  } else if (titleOpacity >= endProgress) {
-                    // Text that has passed - last text stays visible
-                    if (isLastText) {
-                      rotateX = 0;
-                      opacity = 1;
-                    } else {
-                      rotateX = -90;
-                      opacity = 0;
-                    }
-                  } else {
-                    // Text that hasn't appeared yet
-                    rotateX = 90;
-                    opacity = 0;
-                  }
-                  
-                  return (
-                    <h2 
-                      key={index}
-                      className="absolute inset-0 flex items-center justify-center text-[8vw] sm:text-[7vw] font-medium leading-tight tracking-tighter text-foreground md:text-[6vw] lg:text-[5vw] text-center px-4"
-                      style={{
-                        transform: `rotateX(${rotateX}deg) translateZ(0)`,
-                        opacity,
-                        transformStyle: 'preserve-3d',
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        willChange: 'transform, opacity',
-                        WebkitFontSmoothing: 'antialiased',
-                      }}
-                    >
-                      {t(title)}
-                    </h2>
-                  );
-                })}
-              </div>
+    <section id="overview" className="overflow-hidden bg-[#f2eadd] text-[#35231f]">
+      <div className="mx-auto max-w-7xl px-5 py-16 md:px-12 md:py-24 lg:px-20 lg:py-32">
+        <div className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-end lg:gap-20">
+          <div>
+            <div className="mb-8 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.3em] text-[#a66c3d]">
+              <span className="h-px w-12 bg-[#a66c3d]" />
+              {lang === "ar" ? "رؤيتنا" : "Our philosophy"}
+            </div>
+            <h2 className="max-w-3xl text-balance font-display text-[3.4rem] font-semibold leading-[.92] tracking-[-.045em] md:text-7xl lg:text-[6.25rem]">
+              {t("Building Better Communities.")}
+            </h2>
+          </div>
+
+          <div className="border-s border-[#a66c3d]/35 ps-6 md:ps-8">
+            <p className="max-w-xl text-base font-medium leading-8 text-[#755f55] md:text-lg md:leading-9">
+              {t("A leading real estate development and interior design firm delivering premium residential, commercial, and administrative projects across the region. With over 18 years of experience, we combine innovation, quality craftsmanship, and sustainable practices to create spaces that inspire.")}
+            </p>
+            <Link href="#development" className="mt-8 inline-flex min-h-11 items-center gap-3 border-b border-[#35231f] pb-2 text-sm font-bold transition-colors hover:border-[#a66c3d] hover:text-[#a66c3d] focus-visible:outline-2 focus-visible:outline-offset-4">
+              {lang === "ar" ? "اكتشف مشروعاتنا" : "Discover our work"}
+              <ArrowUpLeft size={17} />
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-14 grid grid-cols-12 gap-3 md:mt-20 md:gap-5">
+          <div className="relative col-span-8 aspect-[4/5] overflow-hidden md:col-span-7 md:aspect-[16/11]">
+            <Image src="/projects/liver-mall-2/04.webp" alt="AL GAMAL mixed-use architecture" fill sizes="(max-width: 768px) 67vw, 58vw" className="object-cover transition duration-700 hover:scale-[1.025]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#241612]/55 via-transparent to-transparent" />
+            <p className="absolute bottom-4 start-4 text-[9px] font-bold uppercase tracking-[.24em] text-white md:bottom-6 md:start-6">LIVER MALL 2 · NEW DAMIETTA</p>
+          </div>
+          <div className="col-span-4 flex flex-col gap-3 md:col-span-5 md:gap-5">
+            <div className="relative flex-1 overflow-hidden">
+              <Image src="/projects/plot-138/03.webp" alt="AL GAMAL residential architecture" fill sizes="(max-width: 768px) 33vw, 42vw" className="object-cover transition duration-700 hover:scale-[1.025]" />
+            </div>
+            <div className="flex min-h-32 flex-col justify-between bg-[#35231f] p-4 text-[#f2eadd] md:min-h-48 md:p-8">
+              <span className="font-display text-4xl font-semibold md:text-6xl">+18</span>
+              <span className="text-[9px] font-bold uppercase leading-4 tracking-[.2em] text-[#d7b68f] md:text-[11px]">{lang === "ar" ? "عامًا من الخبرة" : "Years of experience"}</span>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Description */}
-      <div ref={descriptionRef} className="px-6 pt-8 pb-20 md:px-12 md:pt-12 md:pb-28 lg:px-20 lg:pt-16 lg:pb-36">
-        <div className="text-center">
-          
-          <p className="mt-8 leading-relaxed text-muted-foreground text-3xl text-center">
-            {t("A leading real estate development and interior design firm delivering premium residential, commercial, and administrative projects across the region. With over 18 years of experience, we combine innovation, quality craftsmanship, and sustainable practices to create spaces that inspire.").split(" ").map((word, index, array) => {
-              const wordProgress = Math.max(0, Math.min(1, (descriptionProgress * array.length) - index));
-              const opacity = wordProgress;
-              const blur = (1 - wordProgress) * 40;
-              
-              return (
-                <span
-                  key={index}
-                  style={{
-                    opacity,
-                    filter: `blur(${blur}px)`,
-                    transition: 'opacity 0.3s ease, filter 0.3s ease',
-                  }}
-                >
-                  {word}{index < array.length - 1 ? " " : ""}
-                </span>
-              );
-            })}
-          </p>
+        <div className="mt-14 border-t border-[#35231f]/20 md:mt-20">
+          {principles.map((principle) => (
+            <article key={principle.number} className="grid gap-4 border-b border-[#35231f]/20 py-7 md:grid-cols-[80px_1fr_1fr] md:items-center md:gap-8 md:py-9">
+              <span className="text-[10px] font-bold tracking-[.25em] text-[#a66c3d]">{principle.number}</span>
+              <h3 className="font-display text-3xl font-semibold leading-tight md:text-4xl">{t(principle.title)}</h3>
+              <p className="max-w-md text-sm leading-7 text-[#755f55] md:text-base">{t(principle.text)}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
