@@ -1,148 +1,76 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import Image from "next/image";
+import {
+  Blocks, Building2, Gem, HardHat, KeyRound,
+  Landmark, Layers3, Map, Palette, Store, Wrench,
+  type LucideIcon,
+} from "lucide-react";
 import { services } from "@/lib/projects";
 import { useI18n } from "@/lib/i18n";
 import { SectionHeading } from "@/components/ui/section-heading";
 
-// Scroll-triggered "build up" reveal: each brick rises and settles into place
-// as it enters the viewport, evoking a wall being laid course by course.
-function Reveal({
-  children,
-  delay = 0,
-  className,
-}: {
-  children: ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
+const developmentIcons: LucideIcon[] = [Map, Building2, Store, Landmark, Blocks];
+const contractingIcons: LucideIcon[] = [HardHat, Layers3, Wrench, Palette, Gem, KeyRound];
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: shown ? 1 : 0,
-        transform: shown ? "translateY(0) scale(1)" : "translateY(48px) scale(0.97)",
-        transition:
-          "opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: `${delay}ms`,
-        willChange: "transform, opacity",
-      }}
-    >
-      {children}
-    </div>
-  );
-}
-
-// A neat wall of equal-size service "bricks". Two columns on phones (odd last
-// brick spans full width so no gap), three then five on larger screens.
-function ServiceWall({
+function GlassServiceGroup({
+  title,
   items,
-  lgCols,
-  renderIcon,
+  icons,
+  indexOffset = 0,
 }: {
+  title: string;
   items: typeof services;
-  lgCols: string;
-  renderIcon: (index: number) => ReactNode;
+  icons: LucideIcon[];
+  indexOffset?: number;
 }) {
   const { t } = useI18n();
+
   return (
-    <div className={`grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6 ${lgCols} max-w-5xl mx-auto`}>
-      {items.map((service, index) => {
-        const isDanglingLast = index === items.length - 1 && items.length % 2 === 1;
-        return (
-          <Reveal
-            key={index}
-            delay={index * 70}
-            className={`h-full ${isDanglingLast ? "col-span-2 md:col-span-1" : ""}`}
-          >
-            <div className="group relative flex h-full min-h-[150px] flex-col p-4 md:p-6 rounded-xl md:rounded-2xl border border-border bg-card hover:border-foreground/20 transition-colors duration-300">
-              <div className="w-9 h-9 md:w-12 md:h-12 rounded-full bg-foreground/5 flex items-center justify-center mb-3 md:mb-4 group-hover:bg-foreground group-hover:text-background transition-all duration-300">
-                {renderIcon(index)}
+    <div className="relative border-t border-white/15 py-10 md:py-14">
+      <div className="mb-8 flex items-center justify-between gap-6 md:mb-10">
+        <h3 className="font-display text-3xl font-semibold text-white md:text-5xl">{t(title)}</h3>
+        <span className="hidden text-[10px] font-bold uppercase tracking-[.28em] text-white/45 sm:block">{String(indexOffset + 1).padStart(2, "0")} — {String(indexOffset + items.length).padStart(2, "0")}</span>
+      </div>
+
+      <div className="scrollbar-none -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-3">
+        {items.map((service, index) => {
+          const Icon = icons[index];
+          return (
+            <article key={service.name} className="group relative min-h-64 w-[78vw] max-w-sm shrink-0 snap-center overflow-hidden rounded-[28px] border border-white/20 bg-white/[.09] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,.3),0_24px_70px_rgba(0,0,0,.22)] backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:border-white/40 hover:bg-white/[.14] md:w-auto md:max-w-none md:p-8">
+              <div className="pointer-events-none absolute -end-12 -top-12 h-36 w-36 rounded-full bg-[#d7b68f]/15 blur-3xl transition duration-500 group-hover:bg-[#d7b68f]/30" />
+              <div className="relative flex h-full flex-col">
+                <div className="mb-10 grid h-14 w-14 place-items-center rounded-[18px] border border-white/25 bg-white/[.14] text-[#f2eadd] shadow-[inset_0_1px_0_rgba(255,255,255,.35)] backdrop-blur-2xl md:h-16 md:w-16">
+                  <Icon size={27} strokeWidth={1.45} />
+                </div>
+                <span className="mb-3 text-[9px] font-bold tracking-[.28em] text-[#d7b68f]">{String(indexOffset + index + 1).padStart(2, "0")}</span>
+                <h4 className="text-xl font-semibold leading-snug text-white md:text-2xl">{t(service.name)}</h4>
+                <p className="mt-3 text-sm leading-7 text-white/60">{t(service.description)}</p>
               </div>
-              <h4 className="text-base md:text-lg font-medium leading-snug text-foreground mb-1.5 md:mb-2">
-                {t(service.name)}
-              </h4>
-              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                {t(service.description)}
-              </p>
-            </div>
-          </Reveal>
-        );
-      })}
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 }
-
-const PaletteIcon = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-palette">
-    <circle cx="13.5" cy="6.5" r=".5" />
-    <circle cx="17.5" cy="10.5" r=".5" />
-    <circle cx="8.5" cy="7.5" r=".5" />
-    <circle cx="6.5" cy="12.5" r=".5" />
-    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
-  </svg>
-);
 
 export function ServicesSection() {
-  const { t } = useI18n();
   const realEstateServices = services.slice(0, 5);
-  const interiorServices = services.slice(5);
+  const contractingServices = services.slice(5);
 
   return (
-    <section id="services" className="bg-background py-24 md:py-32">
-      <div className="px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          {/* Section Header */}
-          <SectionHeading eyebrow="What we do" title="Our Services" description="Two integrated divisions under one roof — real estate development, and contracting & finishing — delivered to the highest standards of quality and innovation." className="mb-16 max-w-5xl" />
+    <section id="services" className="relative overflow-hidden bg-[#1e1210] py-20 text-[#f2eadd] md:py-28">
+      <Image src="/projects/plot-162-a/03.webp" alt="" fill sizes="100vw" className="object-cover object-center opacity-20" />
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(22,12,10,.98)_5%,rgba(53,35,31,.83)_52%,rgba(23,13,11,.97)_100%)]" />
+      <div className="absolute inset-0 opacity-[.08] grain-overlay" />
+      <div className="pointer-events-none absolute -start-24 top-1/4 h-80 w-80 rounded-full bg-[#a66c3d]/20 blur-[100px]" />
+      <div className="pointer-events-none absolute -end-20 bottom-1/4 h-72 w-72 rounded-full bg-[#d7b68f]/10 blur-[100px]" />
 
-          {/* Real Estate Development Services - PRIMARY */}
-          <div className="mb-16">
-            <Reveal>
-              <h3 className="text-2xl font-medium tracking-tight text-foreground mb-8 text-center">
-                {t("Real Estate Development")}
-              </h3>
-            </Reveal>
-            <ServiceWall
-              items={realEstateServices}
-              lgCols="lg:grid-cols-5"
-              renderIcon={(i) => <span className="text-lg font-bold">{i + 1}</span>}
-            />
-          </div>
-
-          {/* Contracting & Finishing - SECONDARY */}
-          <div>
-            <Reveal>
-              <h3 className="text-2xl font-medium tracking-tight text-foreground mb-8 text-center">
-                {t("Contracting & Finishing")}
-              </h3>
-            </Reveal>
-            <ServiceWall
-              items={interiorServices}
-              lgCols="lg:grid-cols-3"
-              renderIcon={() => PaletteIcon}
-            />
-          </div>
-        </div>
+      <div className="relative mx-auto max-w-7xl px-5 md:px-12 lg:px-20">
+        <SectionHeading eyebrow="What we do" title="Our Services" description="Two integrated divisions under one roof — real estate development, and contracting & finishing — delivered to the highest standards of quality and innovation." className="mb-16 max-w-5xl [&_h2]:text-[#f2eadd] [&_p]:text-white/60" />
+        <GlassServiceGroup title="Real Estate Development" items={realEstateServices} icons={developmentIcons} />
+        <GlassServiceGroup title="Contracting & Finishing" items={contractingServices} icons={contractingIcons} indexOffset={5} />
       </div>
     </section>
   );
