@@ -9,6 +9,7 @@ import { CollectionSection } from "@/components/sections/collection-section";
 import { EditorialSection } from "@/components/sections/editorial-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { FooterSection } from "@/components/sections/footer-section";
+import { ProjectShowcaseSlider } from "@/components/sections/project-showcase-slider";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <HeroSection />
       <PhilosophySection />
       <ServicesSection />
+      <ProjectShowcaseSlider />
 
       {/* ── DIVISION 1: Real Estate Development ── */}
       <DivisionHeader

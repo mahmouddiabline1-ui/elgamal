@@ -20,6 +20,7 @@ const ar: Record<string, string> = {
     "جذور راسخة في الحرفة، وبناء هادف يصنع أماكن تدوم في دمياط الجديدة.",
   "Explore Our Projects": "استكشف مشروعاتنا",
   "Start a Conversation": "ابدأ الحديث معنا",
+  "Scroll to reveal": "مرّر لاكتشاف المشهد",
   "Premium residential, commercial, and administrative developments with luxury interior design and finishing services.":
     "مشروعات سكنية وتجارية وإدارية متميزة، مع خدمات تصميم داخلي وتشطيبات فاخرة.",
 
@@ -106,6 +107,14 @@ const ar: Record<string, string> = {
   "Available Units": "الوحدات المتاحة",
   "Request Project Details": "اطلب تفاصيل المشروع",
   "Related Projects": "مشروعات مشابهة",
+  "What we do": "ماذا نقدم",
+  "Selected work": "مختارات من أعمالنا",
+  "Places with a story": "أماكن لها حكاية",
+  "Swipe through current opportunities and selected work shaped by AL GAMAL.":
+    "اسحب لتستكشف الفرص الحالية ومختارات من المشروعات التي صنعتها الجمل.",
+  "Previous project": "المشروع السابق",
+  "Next project": "المشروع التالي",
+  "View project": "عرض المشروع",
 
   // ── Project card ──
   "Starting Price": "يبدأ من",

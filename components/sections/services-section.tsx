@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { services } from "@/lib/projects";
 import { useI18n } from "@/lib/i18n";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 // Scroll-triggered "build up" reveal: each brick rises and settles into place
 // as it enters the viewport, evoking a wall being laid course by course.
@@ -108,18 +109,11 @@ export function ServicesSection() {
   const interiorServices = services.slice(5);
 
   return (
-    <section id="services" className="bg-background py-20 md:py-32">
+    <section id="services" className="bg-background py-24 md:py-32">
       <div className="px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-medium tracking-tight text-foreground md:text-4xl mb-4">
-              {t("Our Services")}
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              {t("Two integrated divisions under one roof — real estate development, and contracting & finishing — delivered to the highest standards of quality and innovation.")}
-            </p>
-          </div>
+          <SectionHeading eyebrow="What we do" title="Our Services" description="Two integrated divisions under one roof — real estate development, and contracting & finishing — delivered to the highest standards of quality and innovation." className="mb-16 max-w-5xl" />
 
           {/* Real Estate Development Services - PRIMARY */}
           <div className="mb-16">
