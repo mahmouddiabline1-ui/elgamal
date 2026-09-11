@@ -36,7 +36,44 @@ export function HeroSection() {
   const copyLift = Math.min(46, progress * 150);
 
   return (
-    <section id="hero" ref={sectionRef} className="relative h-[220svh] bg-[#241612] text-[#f2eadd]">
+    <div id="hero" className="bg-[#241612]">
+      <section className="relative min-h-[100svh] overflow-hidden bg-[#241612] text-[#f2eadd] md:hidden">
+        <Image src="/brand/al-gamal-hero.webp" alt="Contemporary architecture at golden hour" fill priority sizes="100vw" className="object-cover object-[68%_center]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,16,13,.9)_0%,rgba(35,19,15,.62)_48%,rgba(27,14,11,.96)_100%)]" />
+        <div className="absolute inset-0 opacity-[.08] grain-overlay" />
+
+        <div className="relative z-10 flex min-h-[100svh] flex-col px-5 pb-6 pt-28">
+          <div className="max-w-[22rem]">
+            <p className="mb-4 text-[9px] font-bold uppercase tracking-[.28em] text-[#d7b68f]">{t("Real Estate Development & Contracting")}</p>
+            <h1 className="font-display text-[3.65rem] font-semibold leading-[.82] tracking-[-.055em] text-[#fff8ec] drop-shadow-2xl">
+              {lang === "ar" ? <>قوة<br />تدوم</> : <>Strength<br />that lasts.</>}
+            </h1>
+            <p className="mt-5 max-w-[19rem] text-sm font-medium leading-6 text-[#fff8ec]/82">{t("Rooted in craft. Built with purpose. Creating enduring places across New Damietta.")}</p>
+          </div>
+
+          <div className="mt-auto">
+            <div className="relative h-[31svh] min-h-[235px]">
+              <div className="absolute bottom-5 left-0 h-[82%] w-[61%] rotate-[-2deg] overflow-hidden border border-white/15 shadow-2xl">
+                <Image src="/projects/liver-mall-2/04.webp" alt="LIVER MALL 2 architectural render" fill sizes="62vw" className="object-cover" />
+                <span className="absolute bottom-3 left-3 rounded-full bg-[#f2eadd] px-3 py-1.5 text-[8px] font-bold uppercase tracking-[.18em] text-[#35231f]">LIVER MALL</span>
+              </div>
+              <div className="absolute bottom-0 right-0 h-[68%] w-[48%] rotate-[3deg] overflow-hidden border-4 border-[#35231f] shadow-2xl">
+                <Image src="/projects/plot-138/03.webp" alt="AL GAMAL residential design" fill sizes="50vw" className="object-cover" />
+              </div>
+              <div className="absolute right-1 top-1 grid h-14 w-14 place-items-center rounded-full border border-[#f2eadd]/35 bg-[#35231f]/75 backdrop-blur">
+                <Image src="/brand/al-gamal-icon-light.png" alt="" width={34} height={34} className="h-8 w-8 object-contain" />
+              </div>
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              <Link href="#project-showcase" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f2eadd] px-4 py-3 text-xs font-bold text-[#35231f]">{t("Explore Our Projects")}<ArrowDownLeft size={15} /></Link>
+              <Link href="#contact" className="inline-flex items-center justify-center rounded-full border border-[#f2eadd]/35 px-4 py-3 text-xs font-bold text-[#f2eadd]">{t("Contact Us")}</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section ref={sectionRef} className="relative hidden h-[220svh] bg-[#241612] text-[#f2eadd] md:block">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <div className="absolute inset-0 flex gap-1.5 bg-[#241612] p-1.5 md:gap-2 md:p-2">
           {panels.map((panel, index) => {
@@ -89,6 +126,7 @@ export function HeroSection() {
           <Image src="/brand/al-gamal-logo-light.png" alt="AL GAMAL" width={210} height={70} className="h-auto w-40 drop-shadow-xl md:w-52" />
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
