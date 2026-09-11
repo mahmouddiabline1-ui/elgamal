@@ -36,6 +36,8 @@ jobs:
             | xargs -0 sed -i \
               -e 's#"/apartments/#"/elgamal/apartments/#g' \
               -e 's#"/images/#"/elgamal/images/#g' \
+              -e 's#"/brand/#"/elgamal/brand/#g' \
+              -e 's#"/projects/#"/elgamal/projects/#g' \
               -e 's#"/icon#"/elgamal/icon#g' \
               -e 's#"/apple-icon#"/elgamal/apple-icon#g' \
               -e 's#"/placeholder#"/elgamal/placeholder#g'

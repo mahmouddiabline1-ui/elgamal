@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 
 const footerLinks = {
@@ -33,8 +34,8 @@ export function FooterSection() {
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1 lg:col-span-2">
-            <Link href="#hero" className="text-lg font-medium text-foreground">
-              elgamal
+            <Link href="#hero" className="relative block h-20 w-52">
+              <Image src="/brand/al-gamal-logo-dark.png" alt="AL GAMAL الجمل" fill className="object-contain object-left" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               {t("Building better communities through premium real estate development, luxury interior design, and world-class finishing services.")}
@@ -98,7 +99,7 @@ export function FooterSection() {
       <div className="border-t border-border px-6 py-6 md:px-12 lg:px-20">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-xs text-muted-foreground">
-            © 2026 elgamal. {t("All rights reserved.")}
+            © 2026 AL GAMAL. {t("All rights reserved.")}
           </p>
 
           

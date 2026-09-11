@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Globe } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 
@@ -21,37 +22,37 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-3xl transition-all duration-300 ${isScrolled ? "bg-background/80 backdrop-blur-md rounded-full" : "bg-transparent"}`}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-5xl transition-all duration-300 ${isScrolled ? "bg-background/90 backdrop-blur-md rounded-full border border-border" : "bg-[#35231f]/35 backdrop-blur-sm rounded-full border border-white/15"}`}
       style={{
         boxShadow: isScrolled ? "rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px" : "none"
       }}
     >
       <div className="flex items-center justify-between transition-all duration-300 px-2 pl-5 py-2">
         {/* Logo */}
-        <Link href="#hero" className="text-lg font-medium tracking-tight transition-colors duration-300 text-foreground">
-          elgamal
+        <Link href="#hero" className="relative block h-10 w-32 shrink-0">
+          <Image src={isScrolled ? "/brand/al-gamal-logo-dark.png" : "/brand/al-gamal-logo-light.png"} alt="AL GAMAL الجمل" fill className="object-contain object-left" priority />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-10 md:flex">
-          <Link href="#development" className="text-sm transition-colors text-muted-foreground hover:text-foreground">
+          <Link href="#development" className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}>
             {t("Development")}
           </Link>
           <Link
             href="#contracting"
-            className="text-sm transition-colors text-muted-foreground hover:text-foreground"
+            className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}
           >
             {t("Contracting")}
           </Link>
           <Link
             href="#services"
-            className="text-sm transition-colors text-muted-foreground hover:text-foreground"
+            className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}
           >
             {t("Services")}
           </Link>
           <Link
             href="#about"
-            className="text-sm transition-colors text-muted-foreground hover:text-foreground"
+            className={`text-sm transition-colors ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}
           >
             {t("About")}
           </Link>
@@ -63,14 +64,14 @@ export function Header() {
             type="button"
             onClick={toggle}
             aria-label="Switch language"
-            className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors rounded-full text-muted-foreground hover:text-foreground"
+            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium transition-colors rounded-full ${isScrolled ? "text-muted-foreground hover:text-foreground" : "text-white/80 hover:text-white"}`}
           >
             <Globe size={16} />
             {lang === "en" ? "عربي" : "EN"}
           </button>
           <Link
             href="#contact"
-            className="px-4 py-2 text-sm font-medium transition-all rounded-full bg-foreground text-background hover:opacity-80"
+            className="px-5 py-2 text-sm font-medium transition-all rounded-full bg-[#f2eadd] text-[#35231f] hover:bg-white"
           >
             {t("Contact Us")}
           </Link>
@@ -82,7 +83,7 @@ export function Header() {
             type="button"
             onClick={toggle}
             aria-label="Switch language"
-            className="flex items-center gap-1 text-sm font-medium text-foreground"
+            className={`flex items-center gap-1 text-sm font-medium ${isScrolled ? "text-foreground" : "text-white"}`}
           >
             <Globe size={18} />
             {lang === "en" ? "عربي" : "EN"}
@@ -90,7 +91,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="transition-colors text-foreground"
+            className={`transition-colors ${isScrolled ? "text-foreground" : "text-white"}`}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}

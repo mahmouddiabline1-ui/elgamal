@@ -15,6 +15,11 @@ const ar: Record<string, string> = {
   "Contact Us": "تواصل معنا",
 
   // ── Hero ──
+  "Real Estate Development & Contracting": "التطوير العقاري والمقاولات",
+  "Rooted in craft. Built with purpose. Creating enduring places across New Damietta.":
+    "جذور راسخة في الحرفة، وبناء هادف يصنع أماكن تدوم في دمياط الجديدة.",
+  "Explore Our Projects": "استكشف مشروعاتنا",
+  "Start a Conversation": "ابدأ الحديث معنا",
   "Premium residential, commercial, and administrative developments with luxury interior design and finishing services.":
     "مشروعات سكنية وتجارية وإدارية متميزة، مع خدمات تصميم داخلي وتشطيبات فاخرة.",
 
@@ -82,6 +87,25 @@ const ar: Record<string, string> = {
   "Administrative": "إداري",
   "Mixed Use": "متعدد الاستخدامات",
   "View All Projects": "عرض كل المشروعات",
+  "Built by AL GAMAL": "من تنفيذ الجمل",
+  "Our Projects": "مشروعاتنا",
+  "Explore projects offered for sale, selected portfolio work, and contracting assignments — each presented with its verified status.":
+    "استكشف المشروعات المطروحة للبيع وسابقة الأعمال المختارة ومشروعات المقاولات، مع عرض الحالة المؤكدة لكل مشروع.",
+  "For Sale": "للبيع",
+  "Portfolio": "سابقة أعمال",
+  "Completed": "مكتمل",
+  "Project Code": "رقم المشروع",
+  "By inquiry": "عند الاستعلام",
+  "Back to projects": "العودة إلى المشروعات",
+  "Project Overview": "نظرة عامة على المشروع",
+  "Gallery": "معرض الصور",
+  "Project Information": "بيانات المشروع",
+  "Category": "التصنيف",
+  "Division": "القطاع",
+  "Partner": "الشريك",
+  "Available Units": "الوحدات المتاحة",
+  "Request Project Details": "اطلب تفاصيل المشروع",
+  "Related Projects": "مشروعات مشابهة",
 
   // ── Project card ──
   "Starting Price": "يبدأ من",

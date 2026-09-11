@@ -1,295 +1,140 @@
-export type ProjectStatus = "Available" | "Under Construction" | "Ready";
+export type ProjectStatus = "Available" | "Under Construction" | "Completed" | "Portfolio";
+export type ProjectPurpose = "For Sale" | "Portfolio" | "Contracting";
+
+export interface ProjectUnit { type: string; area: string; floor?: string; }
 
 export interface Project {
   id: number;
+  slug: string;
   name: string;
+  nameAr: string;
+  code: string;
   category: "Residential" | "Commercial" | "Administrative" | "Mixed Use";
   location: string;
-  price: string;
-  area: string;
+  locationAr: string;
+  division: "Real Estate Development" | "Contracting & Finishing";
+  purpose: ProjectPurpose;
   status: ProjectStatus;
   description: string;
+  descriptionAr: string;
   image: string;
-  gallery?: string[];
-  facilities?: string[];
-  amenities?: string[];
-  masterPlan?: string;
-  floorPlans?: string[];
-  paymentPlan?: string;
-  nearbyServices?: string[];
+  gallery: string[];
+  area?: string;
+  partner?: string;
+  series?: string;
+  availableUnits?: ProjectUnit[];
+  highlights?: string[];
 }
+
+const gallery = (slug: string, count: number) =>
+  Array.from({ length: count }, (_, index) => `/projects/${slug}/${String(index + 1).padStart(2, "0")}.webp`);
 
 export const projects: Project[] = [
   {
-    id: 1,
-    name: "Palm Valley Towers",
-    category: "Residential",
-    location: "New Cairo, Egypt",
-    price: "From $150,000",
-    area: "850 - 2,400 m²",
-    status: "Available",
-    description:
-      "A master-planned residential compound offering luxury apartments and duplexes surrounded by lush landscapes, premium amenities, and 24/7 security.",
-    image: "/apartments/apt-01.jpg",
-    gallery: [
-      "/apartments/apt-02.jpg",
-      "/apartments/apt-03.jpg",
-      "/apartments/apt-04.jpg",
-    ],
-    facilities: ["Swimming Pool", "Gym & Spa", "Kids Play Area", "Landscaped Gardens", "Underground Parking"],
-    amenities: ["24/7 Security", "Smart Home System", "High-Speed Internet", "Central Air Conditioning"],
-    masterPlan: "/apartments/apt-05.jpg",
-    floorPlans: [
-      "/apartments/apt-06.jpg",
-      "/apartments/apt-07.jpg",
-    ],
-    paymentPlan: "10% down payment, 10% upon handover, balance over 8 years at 8% interest",
-    nearbyServices: [
-      "International School - 2 km",
-      "Shopping Mall - 1.5 km",
-      "Hospital - 3 km",
-      "Cairo Festival City - 5 km",
+    id: 1, slug: "liver-mall-1", name: "LIVER MALL 1", nameAr: "ليفر مول 1", code: "Plot 13",
+    category: "Mixed Use", location: "Opposite Future Club, New Damietta", locationAr: "أمام نادي المستقبل، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "For Sale", status: "Under Construction",
+    description: "A commercial, administrative and residential destination in the Second District service center, designed as the first chapter of the LIVER MALL series.",
+    descriptionAr: "مشروع تجاري وإداري وسكني في مركز خدمات الحي الثاني، وأول مشروعات سلسلة ليفر مول.",
+    image: "/projects/liver-mall-1/01.webp", gallery: gallery("liver-mall-1", 4), series: "LIVER MALL SERIES",
+    highlights: ["10 ground-floor retail units", "11 mezzanine retail units", "14 administrative offices", "3 residential units"],
+    availableUnits: [
+      { type: "Residential unit", area: "145 m²", floor: "Third floor" },
+      { type: "Residential unit", area: "130 m²", floor: "Third floor" },
+      { type: "Residential unit", area: "150 m²", floor: "Third floor" },
     ],
   },
   {
-    id: 2,
-    name: "Downtown Business Plaza",
-    category: "Commercial",
-    location: "Cairo, Egypt",
-    price: "From $200,000",
-    area: "1,200 - 5,000 m²",
-    status: "Under Construction",
-    description:
-      "A premium Grade-A office building in the heart of Cairo's business district, featuring modern workspaces, meeting rooms, and panoramic city views.",
-    image: "/apartments/apt-08.jpg",
-    gallery: [
-      "/apartments/apt-09.jpg",
-      "/apartments/apt-10.jpg",
-      "/apartments/apt-11.jpg",
-    ],
-    facilities: ["Reception & Lobby", "Conference Halls", "Cafeteria", "Rooftop Terrace", "EV Charging Stations"],
-    amenities: [
-      "24/7 Building Management",
-      "Fiber Optic Internet",
-      "Climate Control",
-      "Fire Safety System",
-      "CCTV Surveillance",
-    ],
-    masterPlan: "/apartments/apt-12.jpg",
-    floorPlans: ["/apartments/apt-13.jpg"],
-    paymentPlan: "20% down payment, 15% during construction, balance upon handover",
-    nearbyServices: [
-      "Central Business District - 500 m",
-      "Metro Station - 800 m",
-      "Banks & ATMs - 300 m",
-      "Fine Dining - 200 m",
-    ],
+    id: 2, slug: "liver-mall-2", name: "LIVER MALL 2", nameAr: "ليفر مول 2", code: "Plot 27/2",
+    category: "Commercial", location: "New Damietta", locationAr: "دمياط الجديدة",
+    division: "Real Estate Development", purpose: "For Sale", status: "Under Construction",
+    description: "The second development in the LIVER MALL series, presented by AL GAMAL with SPT as the owning partner.",
+    descriptionAr: "ثاني مشروعات سلسلة ليفر مول، تقدمه الجمل بالشراكة مع الشركة المالكة SPT.",
+    image: "/projects/liver-mall-2/04.webp", gallery: gallery("liver-mall-2", 6), partner: "SPT", series: "LIVER MALL SERIES",
   },
   {
-    id: 3,
-    name: "Green Hills Compound",
-    category: "Residential",
-    location: "Sheikh Zayed, Egypt",
-    price: "From $180,000",
-    area: "750 - 3,100 m²",
-    status: "Available",
-    description:
-      "An eco-friendly residential community featuring townhouses and villas with green spaces, cycling tracks, and sustainable energy solutions.",
-    image: "/apartments/apt-14.jpg",
-    gallery: [
-      "/apartments/apt-15.jpg",
-      "/apartments/apt-16.jpg",
-      "/apartments/apt-17.jpg",
-    ],
-    facilities: ["Clubhouse", "Running Track", "Community Pool", "BBQ Areas", "Pet Friendly Zones"],
-    amenities: ["Solar Panels", "Rainwater Harvesting", "Smart Security", "Electric Vehicle Charging"],
-    masterPlan: "/apartments/apt-18.jpg",
-    floorPlans: [
-      "/apartments/apt-19.jpg",
-      "/apartments/apt-20.jpg",
-    ],
-    paymentPlan: "15% down payment, balance over 10 years at 7.5% interest",
-    nearbyServices: [
-      "British International School - 1 km",
-      "Hypermarket - 800 m",
-      "Medical Center - 1.2 km",
-      "Golf Club - 2 km",
-    ],
+    id: 3, slug: "plot-52-j", name: "Smart Village Residence", nameAr: "القطعة 52J القرية الذكية", code: "52J",
+    category: "Residential", location: "Smart Village, New Damietta", locationAr: "القرية الذكية، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "For Sale", status: "Available",
+    description: "A contemporary residential building with a refined classical façade and a limited collection of spacious homes.",
+    descriptionAr: "مبنى سكني معاصر بواجهة كلاسيكية راقية ومجموعة محدودة من الوحدات الواسعة.",
+    image: "/projects/plot-52-j/03.webp", gallery: gallery("plot-52-j", 5), area: "150 m²",
+    availableUnits: [{ type: "Apartment", area: "150 m²", floor: "First floor" }, { type: "Apartment", area: "150 m²", floor: "Second floor" }],
   },
   {
-    id: 4,
-    name: "Government Services Complex",
-    category: "Administrative",
-    location: "New Administrative Capital, Egypt",
-    price: "From $350,000",
-    area: "2,500 - 8,000 m²",
-    status: "Ready",
-    description:
-      "A state-of-the-art government administrative complex designed for efficiency, accessibility, and sustainability with modern civic infrastructure.",
-    image: "/apartments/apt-21.jpg",
-    gallery: [
-      "/apartments/apt-01.jpg",
-      "/apartments/apt-02.jpg",
-      "/apartments/apt-03.jpg",
-    ],
-    facilities: ["Public Service Halls", "Conference Center", "Underground Parking", "Green Atrium", "Visitor Lounge"],
-    amenities: [
-      "Wheelchair Accessible",
-      "Advanced Security",
-      "Energy Efficient HVAC",
-      "Public Wi-Fi",
-      "Smart Queue System",
-    ],
-    masterPlan: "/apartments/apt-04.jpg",
-    floorPlans: [
-      "/apartments/apt-05.jpg",
-      "/apartments/apt-06.jpg",
-    ],
-    paymentPlan: "Full payment upon handover or installment plan over 5 years",
-    nearbyServices: [
-      "Government Ministries - 1 km",
-      "Public Transport Hub - 500 m",
-      "Diplomatic Quarter - 3 km",
-      "Financial District - 2 km",
-    ],
+    id: 4, slug: "plot-162-a", name: "Horus North Residence", nameAr: "القطعة 162 أ شمال حورس", code: "162 A",
+    category: "Residential", location: "North Horus, Salah Salem", locationAr: "شمال حورس، صلاح سالم",
+    division: "Real Estate Development", purpose: "For Sale", status: "Available",
+    description: "A distinguished residential project with completed façade character and two large units currently presented for inquiry.",
+    descriptionAr: "مشروع سكني مميز بواجهة مكتملة الطابع ووحدتين كبيرتين متاحتين للاستعلام.",
+    image: "/projects/plot-162-a/03.webp", gallery: gallery("plot-162-a", 8), area: "220 m²",
+    availableUnits: [{ type: "Apartment", area: "220 m²", floor: "Ground floor" }, { type: "Basement unit", area: "220 m²", floor: "Basement" }],
   },
   {
-    id: 5,
-    name: "Tech Park Hub",
-    category: "Commercial",
-    location: "Smart Village, Egypt",
-    price: "From $120,000",
-    area: "500 - 2,500 m²",
-    status: "Available",
-    description:
-      "A modern tech-focused business park with flexible office spaces, co-working areas, and startup incubators built for innovation.",
-    image: "/apartments/apt-07.jpg",
-    gallery: [
-      "/apartments/apt-08.jpg",
-      "/apartments/apt-09.jpg",
-      "/apartments/apt-10.jpg",
-    ],
-    facilities: ["Co-Working Lounge", "Tech Conference Room", "Data Center", "Cafeteria", "Rooftop Deck"],
-    amenities: ["Fiber Optic Connectivity", "Backup Power", "Smart Access Control", "Parking Garage"],
-    masterPlan: "/apartments/apt-11.jpg",
-    floorPlans: [
-      "/apartments/apt-12.jpg",
-      "/apartments/apt-13.jpg",
-    ],
-    paymentPlan: "25% down payment, quarterly installments over 4 years",
-    nearbyServices: [
-      "Tech Companies - On-site",
-      "Cairo-Alexandria Desert Road - 1 km",
-      "Restaurants & Cafes - 500 m",
-      "Gym - 300 m",
-    ],
+    id: 5, slug: "plot-76", name: "District Four Center", nameAr: "القطعة 76 مركز الحي الرابع", code: "76",
+    category: "Mixed Use", location: "Beside Traffic Department, District Four Center", locationAr: "بجوار المرور، مركز الحي الرابع",
+    division: "Real Estate Development", purpose: "For Sale", status: "Available",
+    description: "A mixed-use project with commercial opportunities in a connected district-center location.",
+    descriptionAr: "مشروع متعدد الاستخدامات يضم فرصًا تجارية في موقع متصل بمركز الحي.",
+    image: "/projects/plot-76/01.webp", gallery: gallery("plot-76", 3),
+    availableUnits: [{ type: "Retail unit", area: "40 m²" }, { type: "Half-basement", area: "125 m²", floor: "Basement" }],
   },
   {
-    id: 6,
-    name: "ElGamal City Center",
-    category: "Mixed Use",
-    location: "6th of October, Egypt",
-    price: "From $95,000",
-    area: "400 - 1,800 m²",
-    status: "Under Construction",
-    description:
-      "A vibrant mixed-use development combining retail, residential, and office spaces in one integrated community hub.",
-    image: "/apartments/apt-14.jpg",
-    gallery: [
-      "/apartments/apt-15.jpg",
-      "/apartments/apt-16.jpg",
-      "/apartments/apt-17.jpg",
-    ],
-    facilities: ["Shopping Arcade", "Residential Towers", "Office Floors", "Public Plaza", "Parking Basement"],
-    amenities: ["Central Air Conditioning", "Fire Safety", "CCTV", "Public Transport Access", "High-Speed Elevators"],
-    masterPlan: "/apartments/apt-18.jpg",
-    floorPlans: [
-      "/apartments/apt-19.jpg",
-      "/apartments/apt-20.jpg",
-      "/apartments/apt-21.jpg",
-    ],
-    paymentPlan: "15% down payment, 10% after 6 months, balance over 9 years",
-    nearbyServices: [
-      "Public Bus Station - 200 m",
-      "Restaurants & Retail - On-site",
-      "Schools - 1 km",
-      "Bank Branches - 500 m",
-    ],
+    id: 6, slug: "plot-4-bb", name: "International Garden Residence", nameAr: "القطعة 4BB الحديقة الدولية", code: "4BB",
+    category: "Residential", location: "International Garden, New Damietta", locationAr: "الحديقة الدولية، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Portfolio",
+    description: "A residential construction project documented as part of AL GAMAL's built portfolio. No units are currently offered for sale.",
+    descriptionAr: "مشروع سكني ضمن سابقة أعمال الجمل، ولا توجد به وحدات مطروحة للبيع حاليًا.",
+    image: "/projects/plot-4-bb/01.webp", gallery: gallery("plot-4-bb", 4),
   },
   {
-    id: 7,
-    name: "Executive Tower",
-    category: "Commercial",
-    location: "Maadi, Egypt",
-    price: "From $280,000",
-    area: "1,000 - 4,500 m²",
-    status: "Ready",
-    description:
-      "A prestigious commercial tower offering executive offices with premium specifications, panoramic Nile views, and concierge services.",
-    image: "/apartments/apt-01.jpg",
-    gallery: [
-      "/apartments/apt-02.jpg",
-      "/apartments/apt-03.jpg",
-      "/apartments/apt-04.jpg",
-    ],
-    facilities: ["Executive Lounge", "Conference Suites", "Valet Parking", "Business Center", "Rooftop Garden"],
-    amenities: ["Concierge Service", "Nile View Terraces", "Private Elevators", "Smart Lighting", "Climate Control"],
-    masterPlan: "/apartments/apt-05.jpg",
-    floorPlans: [
-      "/apartments/apt-06.jpg",
-      "/apartments/apt-07.jpg",
-    ],
-    paymentPlan: "20% down payment, balance upon handover or 5-year installment plan",
-    nearbyServices: [
-      "Nile Corniche - 100 m",
-      "International Schools - 2 km",
-      "Hospitals - 1.5 km",
-      "Restaurants & Cafes - 500 m",
-    ],
+    id: 7, slug: "plot-114-bb", name: "Plot 114 BB", nameAr: "القطعة 114 BB", code: "114 BB",
+    category: "Residential", location: "New Damietta", locationAr: "دمياط الجديدة",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
+    description: "An active residential construction project showing AL GAMAL's structural execution and façade craftsmanship.",
+    descriptionAr: "مشروع سكني تحت التنفيذ يعرض خبرة الجمل في الأعمال الإنشائية وتفاصيل الواجهات.",
+    image: "/projects/plot-114-bb/06.webp", gallery: gallery("plot-114-bb", 10),
   },
   {
-    id: 8,
-    name: "Court & Justice Building",
-    category: "Administrative",
-    location: "Nasr City, Egypt",
-    price: "From $400,000",
-    area: "3,000 - 10,000 m²",
-    status: "Available",
-    description:
-      "A purpose-built judicial complex with courtrooms, offices, and public service areas designed for functionality and dignity.",
-    image: "/apartments/apt-08.jpg",
-    gallery: [
-      "/apartments/apt-09.jpg",
-      "/apartments/apt-10.jpg",
-      "/apartments/apt-11.jpg",
-    ],
-    facilities: ["Courtrooms", "Judicial Offices", "Public Waiting Areas", "Secure Parking", "Document Archives"],
-    amenities: ["High Security", "Public Address System", "Wheelchair Ramps", "Fire Suppression", "Video Conferencing"],
-    masterPlan: "/apartments/apt-12.jpg",
-    floorPlans: [
-      "/apartments/apt-13.jpg",
-      "/apartments/apt-14.jpg",
-    ],
-    paymentPlan: "Government budget cycle or milestone-based payments",
-    nearbyServices: [
-      "Ministry of Justice - 500 m",
-      "Police Station - 300 m",
-      "Metro Station - 1 km",
-      "Legal Firms - 400 m",
-    ],
+    id: 8, slug: "plot-100", name: "Plot 100 International Garden", nameAr: "القطعة 100 الأكثر تميز الحديقة الدولية", code: "100",
+    category: "Residential", location: "International Garden, New Damietta", locationAr: "الحديقة الدولية، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
+    description: "A residential project documented from foundations through architectural development.",
+    descriptionAr: "مشروع سكني موثق من مرحلة الأساسات وحتى التطوير المعماري.",
+    image: "/projects/plot-100/01.webp", gallery: gallery("plot-100", 5),
+  },
+  {
+    id: 9, slug: "plot-138", name: "Plot 138 International Garden", nameAr: "القطعة 138 الأكثر تميز الحديقة الدولية", code: "138",
+    category: "Residential", location: "International Garden, New Damietta", locationAr: "الحديقة الدولية، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
+    description: "A residential development combining carefully planned interiors with a distinctive warm-toned façade.",
+    descriptionAr: "مشروع سكني يجمع بين التخطيط الداخلي المدروس وواجهة مميزة بدرجات دافئة.",
+    image: "/projects/plot-138/03.webp", gallery: gallery("plot-138", 8),
+  },
+  {
+    id: 10, slug: "plot-429-31", name: "Plot 429-31", nameAr: "القطعة 429-31 المجاورة 29", code: "429-31",
+    category: "Residential", location: "Neighborhood 29, New Damietta", locationAr: "المجاورة 29، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Completed",
+    description: "A completed residential façade documented for the AL GAMAL project portfolio.",
+    descriptionAr: "واجهة مشروع سكني مكتمل ضمن سابقة أعمال الجمل.",
+    image: "/projects/plot-429-31/01.webp", gallery: gallery("plot-429-31", 6),
+  },
+  {
+    id: 11, slug: "plot-150", name: "Plot 150 North University", nameAr: "القطعة 150 شمال الجامعة", code: "150",
+    category: "Commercial", location: "North University, New Damietta", locationAr: "شمال الجامعة، دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A contracting-only assignment that demonstrates AL GAMAL's on-site structural delivery capabilities.",
+    descriptionAr: "مشروع مقاولات فقط يوضح قدرات الجمل في التنفيذ الإنشائي بالموقع.",
+    image: "/projects/plot-150/02.webp", gallery: gallery("plot-150", 3),
   },
 ];
 
-// First 5 belong to the Real Estate Development division, the remaining 6 to
-// the Contracting & Finishing division. ServicesSection splits them by index.
 export const services = [
-  // ── Real Estate Development ──
   { name: "Real Estate Development", description: "End-to-end real estate development from land acquisition to project delivery." },
   { name: "Residential Development", description: "Premium residential compounds, villas, and apartment buildings." },
   { name: "Commercial Development", description: "Grade-A office towers, retail spaces, and business parks." },
   { name: "Administrative Buildings", description: "Government and corporate headquarters with modern civic design." },
   { name: "Mixed Use Developments", description: "Integrated communities combining retail, residential, and office spaces." },
-  // ── Contracting & Finishing ──
   { name: "General Contracting", description: "Full-scope construction from foundation to structure with certified quality control." },
   { name: "Structural & Concrete Works", description: "Reinforced concrete, skeleton, and structural execution to engineering specifications." },
   { name: "MEP & Installations", description: "Mechanical, electrical, and plumbing systems installed and commissioned." },
@@ -298,49 +143,12 @@ export const services = [
   { name: "Turnkey Fit-out", description: "Complete turnkey finishing and handover — ready-to-use spaces delivered on time." },
 ];
 
-export const completedProjects = [
-  { name: "Sunrise Gardens", category: "Residential", image: "/apartments/apt-15.jpg", year: "2023" },
-  { name: "The Boulevard", category: "Commercial", image: "/apartments/apt-16.jpg", year: "2024" },
-  { name: "The Courthouse", category: "Administrative", image: "/apartments/apt-17.jpg", year: "2022" },
-  { name: "Marina View", category: "Residential", image: "/apartments/apt-18.jpg", year: "2024" },
-  { name: "Plaza 45", category: "Commercial", image: "/apartments/apt-19.jpg", year: "2023" },
-  { name: "City Hall Annex", category: "Administrative", image: "/apartments/apt-20.jpg", year: "2021" },
-];
+export const completedProjects = projects.filter((project) => project.purpose === "Portfolio").map((project) => ({
+  name: project.name, category: project.category, image: project.image, year: "AL GAMAL",
+}));
 
 export const interiorDesignPackages = [
-  {
-    id: 1,
-    name: "Modern Package",
-    description: "Sleek lines, open spaces, and contemporary finishes. Perfect for urban living with smart home integration.",
-    price: "From $15,000",
-    image: "/apartments/apt-21.jpg",
-  },
-  {
-    id: 2,
-    name: "Luxury Package",
-    description: "Premium marble, custom joinery, and statement lighting. Designed for those who expect the extraordinary.",
-    price: "From $35,000",
-    image: "/apartments/apt-01.jpg",
-  },
-  {
-    id: 3,
-    name: "Classic Package",
-    description: "Timeless elegance with ornate details, rich wood tones, and traditional craftsmanship.",
-    price: "From $20,000",
-    image: "/apartments/apt-02.jpg",
-  },
-  {
-    id: 4,
-    name: "Minimal Package",
-    description: "Less is more. Clean surfaces, neutral palettes, and functional beauty for serene spaces.",
-    price: "From $12,000",
-    image: "/apartments/apt-03.jpg",
-  },
-  {
-    id: 5,
-    name: "VIP Package",
-    description: "Bespoke design consultation, exclusive materials, and dedicated project management from concept to handover.",
-    price: "From $50,000",
-    image: "/apartments/apt-04.jpg",
-  },
+  { id: 1, name: "Modern Package", description: "Sleek lines, open spaces, and contemporary finishes. Perfect for urban living with smart home integration.", price: "By inquiry", image: "/apartments/apt-21.jpg" },
+  { id: 2, name: "Luxury Package", description: "Premium marble, custom joinery, and statement lighting. Designed for those who expect the extraordinary.", price: "By inquiry", image: "/apartments/apt-01.jpg" },
+  { id: 3, name: "Classic Package", description: "Timeless elegance with ornate details, rich wood tones, and traditional craftsmanship.", price: "By inquiry", image: "/apartments/apt-02.jpg" },
 ];

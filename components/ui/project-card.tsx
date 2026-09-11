@@ -10,20 +10,24 @@ interface ProjectCardProps {
 }
 
 const statusStyles: Record<ProjectStatus, string> = {
-  Available: "bg-green-100 text-green-700 border-green-200",
-  "Under Construction": "bg-amber-100 text-amber-700 border-amber-200",
-  Ready: "bg-blue-100 text-blue-700 border-blue-200",
+  Available: "bg-[#f2eadd] text-[#35231f] border-[#f2eadd]",
+  "Under Construction": "bg-[#a66c3d] text-white border-[#a66c3d]",
+  Completed: "bg-[#35231f] text-[#f2eadd] border-[#35231f]",
+  Portfolio: "bg-[#35231f] text-[#f2eadd] border-[#35231f]",
 };
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  const name = lang === "ar" ? project.nameAr : project.name;
+  const location = lang === "ar" ? project.locationAr : project.location;
+  const description = lang === "ar" ? project.descriptionAr : project.description;
   return (
-    <div className="group relative rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-lg">
+    <div className="group relative border border-border bg-card overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(53,35,31,.15)]">
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
         <FadeImage
           src={project.image || "/placeholder.svg"}
-          alt={project.name}
+          alt={name}
           fill
           className="object-cover transition-all duration-700 ease-out group-hover:scale-105"
         />
@@ -36,7 +40,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
         <div className="absolute top-4 right-4">
           <span className="inline-block px-3 py-1 text-xs font-medium rounded-full bg-foreground text-background">
-            {t(project.category)}
+            {t(project.purpose)}
           </span>
         </div>
       </div>
@@ -45,35 +49,35 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="p-6">
         <div className="mb-3">
           <h3 className="text-lg font-medium leading-snug text-foreground group-hover:text-primary transition-colors">
-            {t(project.name)}
+            {name}
           </h3>
           <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin">
               <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
               <circle cx="12" cy="10" r="3" />
             </svg>
-            {t(project.location)}
+            {location}
           </p>
         </div>
 
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-          {t(project.description)}
+          {description}
         </p>
 
         <div className="grid grid-cols-2 gap-3 mb-4 text-sm">
-          <div className="rounded-lg bg-secondary/50 p-2">
-            <p className="text-xs text-muted-foreground">{t("Starting Price")}</p>
-            <p className="font-medium text-foreground">{t(project.price)}</p>
+          <div className="rounded-sm bg-secondary/50 p-2">
+            <p className="text-xs text-muted-foreground">{t("Project Code")}</p>
+            <p className="font-medium text-foreground">{project.code}</p>
           </div>
-          <div className="rounded-lg bg-secondary/50 p-2">
+          <div className="rounded-sm bg-secondary/50 p-2">
             <p className="text-xs text-muted-foreground">{t("Area")}</p>
-            <p className="font-medium text-foreground">{t(project.area)}</p>
+            <p className="font-medium text-foreground">{project.area || t("By inquiry")}</p>
           </div>
         </div>
 
         <Link
           href={`/projects/${project.id}`}
-          className="block w-full text-center px-4 py-2.5 text-sm font-medium transition-all rounded-full bg-foreground text-background hover:opacity-80"
+          className="block w-full text-center px-4 py-2.5 text-sm font-medium transition-all rounded-full bg-foreground text-background hover:bg-accent hover:text-accent-foreground"
         >
           {t("View Project")}
         </Link>
