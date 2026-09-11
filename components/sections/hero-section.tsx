@@ -17,14 +17,22 @@ const panels = [
 export function HeroSection() {
   const { t, lang } = useI18n();
   const sectionRef = useRef<HTMLElement>(null);
+  const mobileSectionRef = useRef<HTMLElement>(null);
   const [progress, setProgress] = useState(0);
+  const [mobileProgress, setMobileProgress] = useState(0);
 
   useEffect(() => {
     const update = () => {
       const section = sectionRef.current;
-      if (!section) return;
-      const distance = section.offsetHeight - window.innerHeight;
-      setProgress(Math.max(0, Math.min(1, -section.getBoundingClientRect().top / Math.max(distance, 1))));
+      if (section) {
+        const distance = section.offsetHeight - window.innerHeight;
+        setProgress(Math.max(0, Math.min(1, -section.getBoundingClientRect().top / Math.max(distance, 1))));
+      }
+      const mobileSection = mobileSectionRef.current;
+      if (mobileSection) {
+        const distance = mobileSection.offsetHeight - window.innerHeight;
+        setMobileProgress(Math.max(0, Math.min(1, -mobileSection.getBoundingClientRect().top / Math.max(distance, 1))));
+      }
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
@@ -34,42 +42,49 @@ export function HeroSection() {
   const gridProgress = Math.max(0, Math.min(1, (progress - 0.12) / 0.72));
   const copyOpacity = Math.max(0, 1 - progress / 0.32);
   const copyLift = Math.min(46, progress * 150);
+  const mobileSceneProgress = Math.min(1, mobileProgress / 0.64);
+  const mobileOutroProgress = Math.max(0, Math.min(1, (mobileProgress - 0.48) / 0.38));
 
   return (
     <div id="hero" className="bg-[#241612]">
-      <section className="relative min-h-[100svh] overflow-hidden bg-[#241612] text-[#f2eadd] md:hidden">
-        <Image src="/brand/al-gamal-hero.webp" alt="Contemporary architecture at golden hour" fill priority sizes="100vw" className="object-cover object-[68%_center]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,16,13,.9)_0%,rgba(35,19,15,.62)_48%,rgba(27,14,11,.96)_100%)]" />
-        <div className="absolute inset-0 opacity-[.08] grain-overlay" />
+      <section ref={mobileSectionRef} className="relative h-[230svh] bg-black text-[#f2eadd] md:hidden">
+        <div className="sticky top-0 h-[100svh] overflow-hidden bg-black">
+          <div
+            className="absolute inset-x-0 -top-[12svh] h-[124svh] will-change-transform"
+            style={{ transform: `translate3d(0, ${mobileSceneProgress * 18}svh, 0) scale(${1 + mobileSceneProgress * 0.08})` }}
+          >
+            <Image src="/brand/al-gamal-hero.webp" alt="Contemporary architecture by AL GAMAL" fill priority sizes="100vw" className="object-cover object-[66%_center]" />
+          </div>
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.24),rgba(0,0,0,.05)_46%,rgba(0,0,0,.84))]" />
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col px-5 pb-6 pt-28">
-          <div className="max-w-[22rem]">
-            <p className="mb-4 text-[9px] font-bold uppercase tracking-[.28em] text-[#d7b68f]">{t("Real Estate Development & Contracting")}</p>
-            <h1 className="font-display text-[3.65rem] font-semibold leading-[.82] tracking-[-.055em] text-[#fff8ec] drop-shadow-2xl">
-              {lang === "ar" ? <>قوة<br />تدوم</> : <>Strength<br />that lasts.</>}
+          <div
+            className="absolute inset-x-0 top-[34svh] z-10 px-5 text-center will-change-transform"
+            style={{ opacity: 1 - mobileOutroProgress, transform: `translate3d(0, ${mobileSceneProgress * -16}svh, 0)` }}
+          >
+            <p className="mb-4 text-[10px] font-bold uppercase tracking-[.28em] text-[#e4c49c]">AL GAMAL · NEW DAMIETTA</p>
+            <h1 className="font-display text-[4.75rem] font-semibold leading-[.78] tracking-[-.065em] text-[#fff8ec] drop-shadow-2xl">
+              {lang === "ar" ? <>قوة<br />تدوم</> : <>Built to<br />endure.</>}
             </h1>
-            <p className="mt-5 max-w-[19rem] text-sm font-medium leading-6 text-[#fff8ec]/82">{t("Rooted in craft. Built with purpose. Creating enduring places across New Damietta.")}</p>
           </div>
 
-          <div className="mt-auto">
-            <div className="relative h-[31svh] min-h-[235px]">
-              <div className="absolute bottom-5 left-0 h-[82%] w-[61%] rotate-[-2deg] overflow-hidden border border-white/15 shadow-2xl">
-                <Image src="/projects/liver-mall-2/04.webp" alt="LIVER MALL 2 architectural render" fill sizes="62vw" className="object-cover" />
-                <span className="absolute bottom-3 left-3 rounded-full bg-[#f2eadd] px-3 py-1.5 text-[8px] font-bold uppercase tracking-[.18em] text-[#35231f]">LIVER MALL</span>
-              </div>
-              <div className="absolute bottom-0 right-0 h-[68%] w-[48%] rotate-[3deg] overflow-hidden border-4 border-[#35231f] shadow-2xl">
-                <Image src="/projects/plot-138/03.webp" alt="AL GAMAL residential design" fill sizes="50vw" className="object-cover" />
-              </div>
-              <div className="absolute right-1 top-1 grid h-14 w-14 place-items-center rounded-full border border-[#f2eadd]/35 bg-[#35231f]/75 backdrop-blur">
-                <Image src="/brand/al-gamal-icon-light.png" alt="" width={34} height={34} className="h-8 w-8 object-contain" />
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <Link href="#project-showcase" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f2eadd] px-4 py-3 text-xs font-bold text-[#35231f]">{t("Explore Our Projects")}<ArrowDownLeft size={15} /></Link>
-              <Link href="#contact" className="inline-flex items-center justify-center rounded-full border border-[#f2eadd]/35 px-4 py-3 text-xs font-bold text-[#f2eadd]">{t("Contact Us")}</Link>
+          <div
+            className="absolute inset-0 z-20 bg-black will-change-[opacity]"
+            style={{ opacity: mobileOutroProgress }}
+          />
+          <div
+            className="absolute inset-0 z-30 grid place-items-center will-change-transform"
+            style={{ opacity: Math.max(0, (mobileOutroProgress - 0.18) / 0.82), transform: `scale(${0.68 + mobileOutroProgress * 0.32})` }}
+          >
+            <div className="flex flex-col items-center gap-8">
+              <Image src="/brand/al-gamal-icon-light.png" alt="AL GAMAL" width={176} height={176} className="h-36 w-36 object-contain" />
+              <p className="text-[10px] font-semibold uppercase tracking-[.38em] text-[#d7b68f]">REAL ESTATE · CONTRACTING</p>
             </div>
           </div>
+
+          <div className="absolute bottom-8 left-1/2 z-40 -translate-x-1/2 text-[9px] font-semibold uppercase tracking-[.3em] text-white/60" style={{ opacity: 1 - Math.min(1, mobileProgress * 3) }}>
+            {t("Scroll to reveal")}
+          </div>
+          <div className="absolute inset-0 z-40 opacity-[.07] grain-overlay" />
         </div>
       </section>
 
