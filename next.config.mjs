@@ -7,6 +7,7 @@ const nextConfig = {
   // Export the whole site as static HTML/CSS/JS (no server runtime needed) —
   // reliable on any static host and loads instantly.
   output: "export",
+  trailingSlash: true,
   basePath,
   assetPrefix: basePath || undefined,
   typescript: {
