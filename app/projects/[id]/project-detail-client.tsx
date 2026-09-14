@@ -72,7 +72,7 @@ export function ProjectDetailPageClient({ project }: { project: Project }) {
               </div>
             ) : null}
 
-            <Link href="/#contact" className="mt-8 block rounded-full bg-foreground px-5 py-3 text-center text-sm font-semibold text-background hover:bg-accent hover:text-white">{t("Request Project Details")}</Link>
+            <Link href={project.purpose === "For Sale" ? `/campaigns/${project.slug}/#campaign-lead` : "/#contact"} className="mt-8 block rounded-full bg-foreground px-5 py-3 text-center text-sm font-semibold text-background hover:bg-accent hover:text-white">{t("Request Project Details")}</Link>
           </div>
         </aside>
       </section>

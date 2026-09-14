@@ -9,6 +9,7 @@ const cairo = Cairo({ subsets: ["arabic", "latin"], variable: '--font-cairo' });
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], variable: '--font-cormorant', weight: ["400", "500", "600"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://mahmouddiabline1-ui.github.io/elgamal/'),
   title: 'AL GAMAL | الجمل',
   description: 'AL GAMAL for real estate development, contracting and finishing in New Damietta.',
   icons: {
