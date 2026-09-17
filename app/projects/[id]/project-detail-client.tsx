@@ -67,8 +67,9 @@ export function ProjectDetailPageClient({ project }: { project: Project }) {
               <div className="mt-8">
                 <h3 className="font-display text-2xl">{t("Available Units")}</h3>
                 <div className="mt-4 space-y-3">
-                  {project.availableUnits.map((unit, index) => <div key={`${unit.type}-${index}`} className="bg-secondary/60 p-4 text-sm"><strong>{unit.area}</strong><p className="mt-1 text-muted-foreground">{unit.type}{unit.floor ? ` · ${unit.floor}` : ""}</p></div>)}
+                  {project.availableUnits.map((unit, index) => <div key={`${unit.type}-${index}`} className="bg-secondary/60 p-4 text-sm"><strong>{unit.area}</strong><p className="mt-1 text-muted-foreground">{unit.type}{unit.floor ? ` · ${unit.floor}` : ""}</p>{unit.price ? <p className="mt-3 font-semibold text-foreground">{unit.price}</p> : null}{unit.payment ? <p className="mt-1 text-xs text-muted-foreground">{unit.payment}</p> : null}</div>)}
                 </div>
+                {project.pricingNotes?.length ? <div className="mt-4 space-y-2 text-xs leading-5 text-muted-foreground">{project.pricingNotes.map((note) => <p key={note}>{note}</p>)}</div> : null}
               </div>
             ) : null}
 

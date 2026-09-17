@@ -274,6 +274,8 @@ const ar: Record<string, string> = {
   "Sunday - Thursday: 9:00 AM - 6:00 PM": "الأحد - الخميس: 9:00 ص - 6:00 م",
   "Location": "الموقع",
   "Google Maps Placeholder": "خرائط جوجل (عنصر نائب)",
+  "District Five, Neighborhood 28, above the veterinary clinic, New Damietta": "الحي الخامس، المجاورة 28، أعلى العيادة البيطرية، دمياط الجديدة",
+  "Open in Google Maps": "افتح الموقع على خرائط جوجل",
   "Full Name": "الاسم الكامل",
   "Your full name": "اكتب اسمك الكامل",
   "Message": "الرسالة",

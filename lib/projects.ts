@@ -1,7 +1,7 @@
 export type ProjectStatus = "Available" | "Under Construction" | "Completed" | "Portfolio";
 export type ProjectPurpose = "For Sale" | "Portfolio" | "Contracting";
 
-export interface ProjectUnit { type: string; area: string; floor?: string; }
+export interface ProjectUnit { type: string; area: string; floor?: string; price?: string; payment?: string; }
 
 export interface Project {
   id: number;
@@ -24,6 +24,7 @@ export interface Project {
   series?: string;
   availableUnits?: ProjectUnit[];
   highlights?: string[];
+  pricingNotes?: string[];
 }
 
 const gallery = (slug: string, count: number) =>
@@ -36,9 +37,12 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "For Sale", status: "Under Construction",
     description: "A commercial, administrative and residential destination in the Second District service center, designed as the first chapter of the LIVER MALL series.",
     descriptionAr: "مشروع تجاري وإداري وسكني في مركز خدمات الحي الثاني، وأول مشروعات سلسلة ليفر مول.",
-    image: "/projects/liver-mall-1/01.webp", gallery: gallery("liver-mall-1", 4), series: "LIVER MALL SERIES",
+    image: "/projects/liver-mall-1/01.webp", gallery: gallery("liver-mall-1", 10), series: "LIVER MALL SERIES",
     highlights: ["10 ground-floor retail units", "11 mezzanine retail units", "14 administrative offices", "3 residential units"],
     availableUnits: [
+      { type: "Front retail", area: "By inquiry", floor: "Ground floor", price: "EGP 195,000 / m²", payment: "Up to 3 years" },
+      { type: "Mezzanine retail", area: "By inquiry", floor: "Mezzanine", price: "EGP 95,000 / m²", payment: "Up to 3 years" },
+      { type: "Administrative", area: "By inquiry", floor: "Administrative floor", price: "EGP 75,000 / m²", payment: "Up to 3 years" },
       { type: "Residential unit", area: "145 m²", floor: "Third floor" },
       { type: "Residential unit", area: "130 m²", floor: "Third floor" },
       { type: "Residential unit", area: "150 m²", floor: "Third floor" },
@@ -59,7 +63,8 @@ export const projects: Project[] = [
     description: "A contemporary residential building with a refined classical façade and a limited collection of spacious homes.",
     descriptionAr: "مبنى سكني معاصر بواجهة كلاسيكية راقية ومجموعة محدودة من الوحدات الواسعة.",
     image: "/projects/plot-52-j/03.webp", gallery: gallery("plot-52-j", 5), area: "150 m²",
-    availableUnits: [{ type: "Apartment", area: "150 m²", floor: "First floor" }, { type: "Apartment", area: "150 m²", floor: "Second floor" }],
+    availableUnits: [{ type: "Apartment", area: "150 m²", floor: "First floor", price: "EGP 3,800,000", payment: "Up to 3 years" }, { type: "Apartment", area: "150 m²", floor: "Second floor", price: "EGP 3,800,000", payment: "Up to 3 years" }],
+    pricingNotes: ["Ground-floor and basement package: EGP 4,600,000 over 3 years"],
   },
   {
     id: 4, slug: "plot-162-a", name: "Horus North Residence", nameAr: "القطعة 162 أ شمال حورس", code: "162 A",
@@ -69,6 +74,7 @@ export const projects: Project[] = [
     descriptionAr: "مشروع سكني مميز بواجهة مكتملة الطابع ووحدتين كبيرتين متاحتين للاستعلام.",
     image: "/projects/plot-162-a/03.webp", gallery: gallery("plot-162-a", 8), area: "220 m²",
     availableUnits: [{ type: "Apartment", area: "220 m²", floor: "Ground floor" }, { type: "Basement unit", area: "220 m²", floor: "Basement" }],
+    pricingNotes: ["Ground-floor and basement package: EGP 6,700,000 over one year"],
   },
   {
     id: 5, slug: "plot-76", name: "District Four Center", nameAr: "القطعة 76 مركز الحي الرابع", code: "76",
@@ -77,7 +83,8 @@ export const projects: Project[] = [
     description: "A mixed-use project with commercial opportunities in a connected district-center location.",
     descriptionAr: "مشروع متعدد الاستخدامات يضم فرصًا تجارية في موقع متصل بمركز الحي.",
     image: "/projects/plot-76/01.webp", gallery: gallery("plot-76", 3),
-    availableUnits: [{ type: "Retail unit", area: "40 m²" }, { type: "Half-basement", area: "125 m²", floor: "Basement" }],
+    availableUnits: [{ type: "Retail unit", area: "40 m²", price: "EGP 4,100,000", payment: "Cash" }, { type: "Half-basement", area: "125 m²", floor: "Basement", price: "EGP 1,500,000", payment: "Cash" }],
+    pricingNotes: ["Combined package: EGP 6,000,000 with installments from one to two years"],
   },
   {
     id: 6, slug: "plot-4-bb", name: "International Garden Residence", nameAr: "القطعة 4BB الحديقة الدولية", code: "4BB",
@@ -126,6 +133,63 @@ export const projects: Project[] = [
     description: "A contracting-only assignment that demonstrates AL GAMAL's on-site structural delivery capabilities.",
     descriptionAr: "مشروع مقاولات فقط يوضح قدرات الجمل في التنفيذ الإنشائي بالموقع.",
     image: "/projects/plot-150/02.webp", gallery: gallery("plot-150", 3),
+  },
+  {
+    id: 12, slug: "plot-82-b", name: "Plot 82 B North Horus", nameAr: "القطعة 82 ب شمال حورس", code: "82 B",
+    category: "Residential", location: "North Horus, North Beit Al Watan", locationAr: "شمال حورس، شمال بيت الوطن",
+    division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
+    description: "An AL GAMAL residential development documented across façade, finishing and structural milestones.",
+    descriptionAr: "مشروع تطوير سكني للجمل موثق عبر مراحل الواجهة والتشطيبات والتنفيذ الإنشائي.",
+    image: "/projects/plot-82-b/06.webp", gallery: gallery("plot-82-b", 8),
+  },
+  {
+    id: 13, slug: "plot-232-68", name: "Plot 232/68 Distinctive District", nameAr: "القطعة 232/68 الأكثر تميز", code: "232/68",
+    category: "Residential", location: "Distinctive District, New Damietta", locationAr: "منطقة الأكثر تميز، دمياط الجديدة",
+    division: "Real Estate Development", purpose: "For Sale", status: "Available",
+    description: "A residential development with active finishing works and an available ground-floor and basement opportunity.",
+    descriptionAr: "مشروع تطوير سكني في مرحلة التشطيبات ويضم فرصة متاحة بالدور الأرضي والبدروم.",
+    image: "/projects/plot-232-68/02.webp", gallery: gallery("plot-232-68", 8), area: "180 m²",
+    availableUnits: [{ type: "Ground floor and basement", area: "180 m²", floor: "North-west orientation", price: "EGP 6,000,000", payment: "Over one year" }],
+  },
+  {
+    id: 14, slug: "plot-164-b", name: "Plot 164 B North Horus", nameAr: "القطعة 164 ب شمال حورس", code: "164 B",
+    category: "Residential", location: "North Horus, New Damietta", locationAr: "شمال حورس، دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A contracting assignment documenting reinforced-concrete execution and ongoing residential construction.",
+    descriptionAr: "مشروع مقاولات يوثق أعمال الخرسانة المسلحة ومراحل التنفيذ السكني الجارية.",
+    image: "/projects/plot-164-b/03.webp", gallery: gallery("plot-164-b", 6),
+  },
+  {
+    id: 15, slug: "plot-106", name: "Plot 106 Distinctive District", nameAr: "القطعة 106 الأكثر تميز", code: "106",
+    category: "Residential", location: "Distinctive District, New Damietta", locationAr: "منطقة الأكثر تميز، دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A contracting-only residential project captured during façade and exterior finishing works.",
+    descriptionAr: "مشروع مقاولات سكني موثق أثناء تنفيذ أعمال الواجهات والتشطيبات الخارجية.",
+    image: "/projects/plot-106/02.webp", gallery: gallery("plot-106", 4),
+  },
+  {
+    id: 16, slug: "plot-413-44", name: "Plot 413/44", nameAr: "القطعة 413/44", code: "413/44",
+    category: "Residential", location: "New Damietta", locationAr: "دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A residential contracting project documented during its structural construction phase.",
+    descriptionAr: "مشروع مقاولات سكني موثق خلال مرحلة التنفيذ الإنشائي.",
+    image: "/projects/plot-413-44/01.webp", gallery: gallery("plot-413-44", 2),
+  },
+  {
+    id: 17, slug: "plot-65-park", name: "Plot 65 Park Damietta", nameAr: "القطعة 65 بارك دمياط", code: "65",
+    category: "Residential", location: "Park Damietta, New Damietta", locationAr: "بارك دمياط، دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A full contracting and finishing record spanning structural reinforcement, plastering, façade and interior design stages.",
+    descriptionAr: "سجل متكامل لأعمال المقاولات والتشطيب من التسليح والمحارة وحتى الواجهة والتصميمات الداخلية.",
+    image: "/projects/plot-65-park/02.webp", gallery: gallery("plot-65-park", 8),
+  },
+  {
+    id: 18, slug: "plot-9", name: "Plot 9 Distinctive District", nameAr: "القطعة 9 الأكثر تميز", code: "9",
+    category: "Residential", location: "Distinctive District, New Damietta", locationAr: "منطقة الأكثر تميز، دمياط الجديدة",
+    division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
+    description: "A contracting project documented from structure and staircase works through façade finishing.",
+    descriptionAr: "مشروع مقاولات موثق من الأعمال الإنشائية والسلالم وحتى مراحل تشطيب الواجهة.",
+    image: "/projects/plot-9/03.webp", gallery: gallery("plot-9", 8),
   },
 ];
 
