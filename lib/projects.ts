@@ -116,7 +116,7 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
     description: "A residential development combining carefully planned interiors with a distinctive warm-toned façade.",
     descriptionAr: "مشروع سكني يجمع بين التخطيط الداخلي المدروس وواجهة مميزة بدرجات دافئة.",
-    image: "/projects/plot-138/03.webp", gallery: gallery("plot-138", 10),
+    image: "/projects/plot-138/03.webp", gallery: gallery("plot-138", 12),
   },
   {
     id: 10, slug: "plot-429-31", name: "Plot 429-31", nameAr: "القطعة 429-31 المجاورة 29", code: "429-31",
