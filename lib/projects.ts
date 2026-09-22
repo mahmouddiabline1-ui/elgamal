@@ -37,7 +37,7 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "For Sale", status: "Under Construction",
     description: "A commercial, administrative and residential destination in the Second District service center, designed as the first chapter of the LIVER MALL series.",
     descriptionAr: "مشروع تجاري وإداري وسكني في مركز خدمات الحي الثاني، وأول مشروعات سلسلة ليفر مول.",
-    image: "/projects/liver-mall-1/01.webp", gallery: gallery("liver-mall-1", 10), series: "LIVER MALL SERIES",
+    image: "/projects/liver-mall-1/01.webp", gallery: gallery("liver-mall-1", 12), series: "LIVER MALL SERIES",
     highlights: ["10 ground-floor retail units", "11 mezzanine retail units", "14 administrative offices", "3 residential units"],
     availableUnits: [
       { type: "Front retail", area: "By inquiry", floor: "Ground floor", price: "EGP 195,000 / m²", payment: "Up to 3 years" },
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
     description: "A residential development combining carefully planned interiors with a distinctive warm-toned façade.",
     descriptionAr: "مشروع سكني يجمع بين التخطيط الداخلي المدروس وواجهة مميزة بدرجات دافئة.",
-    image: "/projects/plot-138/03.webp", gallery: gallery("plot-138", 8),
+    image: "/projects/plot-138/03.webp", gallery: gallery("plot-138", 10),
   },
   {
     id: 10, slug: "plot-429-31", name: "Plot 429-31", nameAr: "القطعة 429-31 المجاورة 29", code: "429-31",
@@ -140,7 +140,7 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "Portfolio", status: "Under Construction",
     description: "An AL GAMAL residential development documented across façade, finishing and structural milestones.",
     descriptionAr: "مشروع تطوير سكني للجمل موثق عبر مراحل الواجهة والتشطيبات والتنفيذ الإنشائي.",
-    image: "/projects/plot-82-b/06.webp", gallery: gallery("plot-82-b", 8),
+    image: "/projects/plot-82-b/01.webp", gallery: gallery("plot-82-b", 3),
   },
   {
     id: 13, slug: "plot-232-68", name: "Plot 232/68 Distinctive District", nameAr: "القطعة 232/68 الأكثر تميز", code: "232/68",
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     division: "Real Estate Development", purpose: "For Sale", status: "Available",
     description: "A residential development with active finishing works and an available ground-floor and basement opportunity.",
     descriptionAr: "مشروع تطوير سكني في مرحلة التشطيبات ويضم فرصة متاحة بالدور الأرضي والبدروم.",
-    image: "/projects/plot-232-68/02.webp", gallery: gallery("plot-232-68", 8), area: "180 m²",
+    image: "/projects/plot-232-68/01.webp", gallery: gallery("plot-232-68", 4), area: "180 m²",
     availableUnits: [{ type: "Ground floor and basement", area: "180 m²", floor: "North-west orientation", price: "EGP 6,000,000", payment: "Over one year" }],
   },
   {
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
     description: "A full contracting and finishing record spanning structural reinforcement, plastering, façade and interior design stages.",
     descriptionAr: "سجل متكامل لأعمال المقاولات والتشطيب من التسليح والمحارة وحتى الواجهة والتصميمات الداخلية.",
-    image: "/projects/plot-65-park/02.webp", gallery: gallery("plot-65-park", 8),
+    image: "/projects/plot-65-park/02.webp", gallery: gallery("plot-65-park", 10),
   },
   {
     id: 18, slug: "plot-9", name: "Plot 9 Distinctive District", nameAr: "القطعة 9 الأكثر تميز", code: "9",
@@ -189,7 +189,7 @@ export const projects: Project[] = [
     division: "Contracting & Finishing", purpose: "Contracting", status: "Under Construction",
     description: "A contracting project documented from structure and staircase works through façade finishing.",
     descriptionAr: "مشروع مقاولات موثق من الأعمال الإنشائية والسلالم وحتى مراحل تشطيب الواجهة.",
-    image: "/projects/plot-9/03.webp", gallery: gallery("plot-9", 8),
+    image: "/projects/plot-9/03.webp", gallery: gallery("plot-9", 10),
   },
 ];
 
